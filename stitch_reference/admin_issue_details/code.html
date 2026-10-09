@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Issue Details - InfraCare</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary-fixed": "#ffdcc6",
+                        "surface-container": "#1e2330",
+                        "surface-container-highest": "#333848",
+                        "success": "#10b981",
+                        "on-primary-fixed": "#001a42",
+                        "secondary-container": "#3a4a5f",
+                        "on-secondary-fixed-variant": "#38485d",
+                        "on-surface-variant": "#c2c6d6",
+                        "background": "#10131a",
+                        "error-container": "#93000a",
+                        "primary": "#adc6ff",
+                        "surface": "#0f131f",
+                        "on-secondary-container": "#a9bad3",
+                        "surface-container-high": "#272a31",
+                        "tertiary": "#ffb786",
+                        "secondary": "#b7c8e1",
+                        "error": "#ef4444",
+                        "on-surface": "#e1e2ec",
+                        "primary-fixed": "#d8e2ff",
+                        "surface-bright": "#363941",
+                        "primary-fixed-dim": "#adc6ff",
+                        "on-primary": "#002e6a",
+                        "on-tertiary-fixed-variant": "#723600",
+                        "secondary-fixed-dim": "#b7c8e1",
+                        "on-tertiary-fixed": "#311400",
+                        "on-error-container": "#ffdad6",
+                        "primary-container": "#4d8eff",
+                        "surface-container-lowest": "#0a0e1a",
+                        "warning": "#f59e0b",
+                        "inverse-surface": "#e1e2ec",
+                        "surface-dim": "#0f131f",
+                        "on-secondary-fixed": "#0b1c30",
+                        "surface-container-low": "#191b23",
+                        "surface-tint": "#adc6ff",
+                        "on-error": "#690005",
+                        "outline-variant": "#424754",
+                        "on-background": "#e1e2ec",
+                        "surface-variant": "#32353c",
+                        "outline": "#475569",
+                        "inverse-primary": "#005ac2",
+                        "on-tertiary-container": "#461f00",
+                        "tertiary-container": "#df7412",
+                        "on-primary-container": "#00285d",
+                        "tertiary-fixed-dim": "#ffb786",
+                        "inverse-on-surface": "#2e3038",
+                        "on-primary-fixed-variant": "#004395",
+                        "on-secondary": "#213145",
+                        "secondary-fixed": "#d3e4fe",
+                        "on-tertiary": "#502400"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "gutter": "24px",
+                        "unit": "4px",
+                        "margin": "24px",
+                        "container-max": "1440px"
+                    },
+                    "fontFamily": {
+                        "title-lg": ["Plus Jakarta Sans", "sans-serif"],
+                        "label-lg": ["Plus Jakarta Sans", "sans-serif"],
+                        "body-md": ["Plus Jakarta Sans", "sans-serif"],
+                        "label-md": ["Plus Jakarta Sans", "sans-serif"],
+                        "body-lg": ["Plus Jakarta Sans", "sans-serif"],
+                        "headline-sm": ["Plus Jakarta Sans", "sans-serif"]
+                    },
+                    "fontSize": {
+                        "title-lg": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "label-lg": ["14px", { "lineHeight": "20px", "letterSpacing": "0.1px", "fontWeight": "500" }],
+                        "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "label-md": ["12px", { "lineHeight": "16px", "fontWeight": "500" }],
+                        "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-sm": ["24px", { "lineHeight": "32px", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen pb-24">
+<header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-gutter h-16 bg-surface border-b border-outline-variant">
+<div class="flex items-center space-x-4">
+<button aria-label="Go back" class="p-2 -ml-2 rounded-full hover:bg-surface-container-high transition-colors flex items-center justify-center text-primary">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">arrow_back</span>
+</button>
+<h1 class="text-title-lg font-title-lg font-bold text-primary">Issue Details</h1>
+</div>
+<div></div>
+</header>
+<main class="mt-16 p-margin max-w-3xl mx-auto space-y-gutter">
+<section class="bg-surface-container rounded-xl p-6 border border-outline-variant shadow-sm relative overflow-hidden">
+<div class="absolute top-0 left-0 w-1 h-full bg-error-container"></div>
+<div class="flex justify-between items-start mb-4">
+<div class="flex items-center space-x-3">
+<span class="text-on-surface-variant font-label-md text-label-md px-2 py-1 bg-surface-container-high rounded border border-outline-variant">ISS-0012</span>
+</div>
+<div class="flex items-center bg-error-container/20 text-on-error-container border border-error-container px-3 py-1 rounded-full">
+<span class="material-symbols-outlined text-[16px] mr-1" style="font-variation-settings: 'FILL' 1;">error</span>
+<span class="font-label-md text-label-md uppercase tracking-wide">HIGH PRIORITY</span>
+</div>
+</div>
+<h2 class="text-headline-sm font-headline-sm text-on-surface">Broken Projector</h2>
+<div class="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
+<div class="bg-surface-container-low p-3 rounded-lg border border-outline-variant flex items-center">
+<div class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center mr-3">
+<span class="material-symbols-outlined text-primary">person</span>
+</div>
+<div>
+<p class="font-label-md text-label-md text-on-surface-variant uppercase">Reporter</p>
+<p class="font-body-md text-body-md text-on-surface">Prof. Smith</p>
+</div>
+</div>
+<div class="bg-surface-container-low p-3 rounded-lg border border-outline-variant flex items-center">
+<div class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center mr-3">
+<span class="material-symbols-outlined text-primary">location_on</span>
+</div>
+<div>
+<p class="font-label-md text-label-md text-on-surface-variant uppercase">Location</p>
+<p class="font-body-md text-body-md text-on-surface">Engineering Block A</p>
+</div>
+</div>
+<div class="bg-surface-container-low p-3 rounded-lg border border-outline-variant flex items-center">
+<div class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center mr-3">
+<span class="material-symbols-outlined text-primary">build</span>
+</div>
+<div>
+<p class="font-label-md text-label-md text-on-surface-variant uppercase">Category</p>
+<p class="font-body-md text-body-md text-on-surface">Electrical</p>
+</div>
+</div>
+</div>
+</section>
+<section class="bg-surface-container rounded-xl p-6 border border-outline-variant shadow-sm">
+<h3 class="text-title-lg font-title-lg text-on-surface mb-3 flex items-center">
+<span class="material-symbols-outlined mr-2 text-on-surface-variant">description</span>
+                Description
+            </h3>
+<p class="font-body-lg text-body-lg text-on-surface-variant leading-relaxed bg-surface-container-low p-4 rounded-lg border border-outline-variant">
+                "The projector in Room 102 is not turning on and shows a red warning light."
+            </p>
+</section>
+<section class="bg-surface-container rounded-xl p-6 border border-outline-variant shadow-sm">
+<h3 class="text-title-lg font-title-lg text-on-surface mb-4 flex items-center">
+<span class="material-symbols-outlined mr-2 text-on-surface-variant">image</span>
+                Attached Visuals
+            </h3>
+<div class="w-full h-64 rounded-xl border border-outline-variant overflow-hidden relative group cursor-pointer bg-surface-container-low">
+<img class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-300" data-alt="A close-up, high-quality photograph of a modern, sleek ceiling-mounted digital projector in a dimly lit university lecture hall. The projector has a glowing red LED warning light indicating a malfunction. The overall scene has a cool, technical atmosphere, aligning with a corporate IT infrastructure context, utilizing deep shadows and crisp focus." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAo9gpDGZbw7bZYXZ4SJPBjZs4OfHe5hdyGE0Tj7wIRHijbW6kM0B65QZX19XtQYe41Mv0zrF8UOhfUqeT9z007K-DLhKgFcW9NNnIv1JMhRHP309oIRV_vOiwJZEpal-yKT9KXH98gKv32Vn1qWc-d9pSXeldb1gy3Y96PWokTszWwTgmVZBm85hOQ23UNCWTPpyJvixR1cDTeFue7lX2SBkKm0_ql1LF09A2Na4q1x27qXQkbo39WTQ"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-lowest to-transparent opacity-50"></div>
+<div class="absolute bottom-3 right-3 bg-surface-container/80 backdrop-blur-sm px-2 py-1 rounded text-on-surface font-label-md text-label-md flex items-center">
+<span class="material-symbols-outlined text-[16px] mr-1">zoom_in</span> View Full
+                </div>
+</div>
+</section>
+<section class="bg-surface-container rounded-xl p-6 border border-outline-variant shadow-sm mb-8">
+<h3 class="text-title-lg font-title-lg text-on-surface mb-6 flex items-center">
+<span class="material-symbols-outlined mr-2 text-on-surface-variant">timeline</span>
+                Status Timeline
+            </h3>
+<div class="relative border-l border-outline-variant ml-3 space-y-6">
+<div class="relative pl-6">
+<div class="absolute -left-[9px] top-1 w-4 h-4 rounded-full bg-success ring-4 ring-surface-container"></div>
+<p class="font-label-md text-label-md text-success font-bold">REPORTED</p>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">Oct 24, 08:30 AM</p>
+</div>
+<div class="relative pl-6">
+<div class="absolute -left-[9px] top-1 w-4 h-4 rounded-full bg-primary ring-4 ring-surface-container animate-pulse"></div>
+<p class="font-label-md text-label-md text-primary font-bold">ASSIGNED</p>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">Pending action by technician.</p>
+</div>
+<div class="relative pl-6 opacity-40">
+<div class="absolute -left-[9px] top-1 w-4 h-4 rounded-full bg-surface-container border-2 border-outline-variant ring-4 ring-surface-container"></div>
+<p class="font-label-md text-label-md text-on-surface font-bold">IN PROGRESS</p>
+</div>
+<div class="relative pl-6 opacity-40">
+<div class="absolute -left-[9px] top-1 w-4 h-4 rounded-full bg-surface-container border-2 border-outline-variant ring-4 ring-surface-container"></div>
+<p class="font-label-md text-label-md text-on-surface font-bold">RESOLVED</p>
+</div>
+<div class="relative pl-6 opacity-40">
+<div class="absolute -left-[9px] top-1 w-4 h-4 rounded-full bg-surface-container border-2 border-outline-variant ring-4 ring-surface-container"></div>
+<p class="font-label-md text-label-md text-on-surface font-bold">CLOSED</p>
+</div>
+</div>
+</section>
+</main>
+<div class="fixed bottom-0 left-0 w-full bg-surface/90 backdrop-blur-md border-t border-outline-variant p-4 z-40 flex justify-center pb-safe shadow-[0_-4px_20px_rgba(0,0,0,0.2)]">
+<button class="bg-primary hover:bg-primary/90 text-on-primary font-label-lg text-label-lg h-[48px] px-8 rounded-full w-full max-w-md flex items-center justify-center space-x-2 transition-all duration-200 transform hover:scale-[0.98] shadow-md">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">update</span>
+<span>Update Status</span>
+</button>
+</div>
+</body></html>

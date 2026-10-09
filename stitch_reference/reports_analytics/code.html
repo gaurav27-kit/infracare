@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>InfraCare Admin - Reports &amp; Analytics</title>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Config -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "tertiary-fixed": "#ffdcc6",
+                    "surface-container": "#1e2330",
+                    "surface-container-highest": "#333848",
+                    "success": "#10b981",
+                    "on-primary-fixed": "#001a42",
+                    "secondary-container": "#3a4a5f",
+                    "on-secondary-fixed-variant": "#38485d",
+                    "on-surface-variant": "#c2c6d6",
+                    "background": "#10131a",
+                    "error-container": "#93000a",
+                    "primary": "#adc6ff",
+                    "surface": "#0f131f",
+                    "on-secondary-container": "#a9bad3",
+                    "surface-container-high": "#272a31",
+                    "tertiary": "#ffb786",
+                    "secondary": "#b7c8e1",
+                    "error": "#ef4444",
+                    "on-surface": "#e1e2ec",
+                    "primary-fixed": "#d8e2ff",
+                    "surface-bright": "#363941",
+                    "primary-fixed-dim": "#adc6ff",
+                    "on-primary": "#002e6a",
+                    "on-tertiary-fixed-variant": "#723600",
+                    "secondary-fixed-dim": "#b7c8e1",
+                    "on-tertiary-fixed": "#311400",
+                    "on-error-container": "#ffdad6",
+                    "primary-container": "#4d8eff",
+                    "surface-container-lowest": "#0a0e1a",
+                    "warning": "#f59e0b",
+                    "inverse-surface": "#e1e2ec",
+                    "surface-dim": "#0f131f",
+                    "on-secondary-fixed": "#0b1c30",
+                    "surface-container-low": "#191b23",
+                    "surface-tint": "#adc6ff",
+                    "on-error": "#690005",
+                    "outline-variant": "#424754",
+                    "on-background": "#e1e2ec",
+                    "surface-variant": "#32353c",
+                    "outline": "#475569",
+                    "inverse-primary": "#005ac2",
+                    "on-tertiary-container": "#461f00",
+                    "tertiary-container": "#df7412",
+                    "on-primary-container": "#00285d",
+                    "tertiary-fixed-dim": "#ffb786",
+                    "inverse-on-surface": "#2e3038",
+                    "on-primary-fixed-variant": "#004395",
+                    "on-secondary": "#213145",
+                    "secondary-fixed": "#d3e4fe",
+                    "on-tertiary": "#502400"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "gutter": "24px",
+                    "unit": "4px",
+                    "margin": "24px",
+                    "container-max": "1440px"
+            },
+            "fontFamily": {
+                    "title-lg": ["Plus Jakarta Sans"],
+                    "label-lg": ["Plus Jakarta Sans"],
+                    "body-md": ["Plus Jakarta Sans"],
+                    "label-md": ["Plus Jakarta Sans"],
+                    "body-lg": ["Plus Jakarta Sans"],
+                    "headline-sm": ["Plus Jakarta Sans"]
+            },
+            "fontSize": {
+                    "title-lg": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                    "label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.1px", "fontWeight": "500"}],
+                    "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "label-md": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                    "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "headline-sm": ["24px", {"lineHeight": "32px", "fontWeight": "600"}]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-family: 'Material Symbols Outlined';
+            font-weight: normal;
+            font-style: normal;
+            font-size: 24px;
+            line-height: 1;
+            letter-spacing: normal;
+            text-transform: none;
+            display: inline-block;
+            white-space: nowrap;
+            word-wrap: normal;
+            direction: ltr;
+            -webkit-font-feature-settings: 'liga';
+            -webkit-font-smoothing: antialiased;
+        }
+        
+        /* Custom Donut Chart via CSS */
+        .donut-chart {
+            background: conic-gradient(
+                theme('colors.primary') 0% 45%, 
+                theme('colors.tertiary') 45% 75%, 
+                theme('colors.secondary') 75% 90%,
+                theme('colors.surface-container-high') 90% 100%
+            );
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-lg text-body-lg min-h-screen flex flex-col antialiased selection:bg-primary-container selection:text-on-primary-container">
+<!-- TopAppBar -->
+<header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-gutter h-16 border-b border-outline-variant dark:border-outline-variant bg-surface dark:bg-surface">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-primary dark:text-primary md:hidden cursor-pointer" data-icon="menu">menu</span>
+<span class="text-title-lg font-title-lg font-bold text-primary dark:text-primary">Admin Dashboard</span>
+</div>
+<!-- Desktop Navigation Integration (Based on guidelines to move bottom nav items to top on desktop) -->
+<nav class="hidden md:flex gap-8 absolute left-1/2 -translate-x-1/2">
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-on-surface dark:hover:text-on-surface transition-colors flex items-center gap-2 text-label-lg font-label-lg" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="dashboard">dashboard</span>
+                Dashboard
+            </a>
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-on-surface dark:hover:text-on-surface transition-colors flex items-center gap-2 text-label-lg font-label-lg" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="warning">warning</span>
+                Issues
+            </a>
+<a class="text-primary dark:text-primary flex items-center gap-2 text-label-lg font-label-lg" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="assessment" style="font-variation-settings: 'FILL' 1;">assessment</span>
+                Reports
+            </a>
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-on-surface dark:hover:text-on-surface transition-colors flex items-center gap-2 text-label-lg font-label-lg" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="settings">settings</span>
+                Settings
+            </a>
+</nav>
+<div class="w-8 h-8 rounded-full overflow-hidden border border-outline bg-surface-container-high shrink-0">
+<img class="w-full h-full object-cover" data-alt="A close-up, high-quality, professional headshot portrait of an IT systems administrator in a dimly lit, high-tech control room environment, sharp focus, cinematic lighting, modern corporate dark mode style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD7dUlQZEYnmSx5wRrSB9Cq-RwZDU7MkkQyiJNmuXffv9rxgk9GdYitBZ6wT5hmSR7978k2vNAe_lg82cTSeMdEo__8nxJwiBLd5ZRn-X7lUpU1n_St27SOGLPK5oL518j7Dfef--KLPpKj0mOap6i4bv61bLoiBkWjezXa7k_P-tbIyXMxLgpdP96bdqRDAxrwGgob6sKCyuq0gTyaHv8uPz6DQBYtiOPU1Ue-UO-q4clFFkjmYxHgDA"/>
+</div>
+</header>
+<!-- Main Canvas -->
+<main class="flex-grow pt-24 pb-28 md:pb-12 px-4 md:px-8 max-w-container-max mx-auto w-full flex flex-col gap-6">
+<!-- Page Header Context -->
+<div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-4 mb-2">
+<div>
+<h1 class="text-headline-sm font-headline-sm text-on-surface">Reports &amp; Analytics</h1>
+<p class="text-body-md font-body-md text-on-surface-variant mt-1">System performance and issue resolution metrics.</p>
+</div>
+<div class="flex items-center gap-3 w-full md:w-auto">
+<button class="flex-1 md:flex-none flex items-center justify-between gap-3 bg-surface-container border border-outline hover:border-primary text-on-surface px-4 py-2 rounded-lg text-label-lg font-label-lg transition-colors group">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors text-[18px]">calendar_today</span>
+                        Last 7 Days
+                    </div>
+<span class="material-symbols-outlined text-on-surface-variant text-[18px]">expand_more</span>
+</button>
+<button class="flex items-center justify-center bg-surface-container border border-outline hover:bg-surface-container-high text-on-surface w-10 h-10 rounded-lg transition-colors">
+<span class="material-symbols-outlined text-[20px]">download</span>
+</button>
+</div>
+</div>
+<!-- Analytics Bento Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+<!-- Trend Line Chart (Full width top) -->
+<div class="col-span-1 md:col-span-2 lg:col-span-3 bg-surface-container border border-outline-variant rounded-xl p-5 md:p-6 flex flex-col h-[320px] relative overflow-hidden group hover:border-outline transition-colors">
+<div class="flex justify-between items-start mb-6 z-10 relative">
+<div>
+<h2 class="text-title-lg font-title-lg text-on-surface">System Issue Volume Trend</h2>
+<p class="text-label-lg font-label-lg text-on-surface-variant mt-1">Daily reported incidents across all nodes</p>
+</div>
+<div class="flex items-center gap-2 bg-surface-container-highest px-3 py-1 rounded-full">
+<span class="w-2 h-2 rounded-full bg-success"></span>
+<span class="text-label-md font-label-md text-on-surface">Stable</span>
+</div>
+</div>
+<!-- Stylized SVG Line Chart Placeholder -->
+<div class="flex-grow w-full relative mt-auto z-10">
+<svg class="w-full h-full" preserveaspectratio="none" viewbox="0 0 1000 200">
+<defs>
+<lineargradient id="trend-gradient" x1="0" x2="0" y1="0" y2="1">
+<stop offset="0%" stop-color="theme('colors.primary')" stop-opacity="0.3"></stop>
+<stop offset="100%" stop-color="theme('colors.primary')" stop-opacity="0.0"></stop>
+</lineargradient>
+</defs>
+<!-- Grid lines -->
+<path d="M0 50 H 1000 M0 100 H 1000 M0 150 H 1000" fill="none" opacity="0.3" stroke="theme('colors.outline-variant')" stroke-dasharray="4 4" stroke-width="1"></path>
+<!-- Data Area -->
+<path d="M0 200 L 0 120 C 150 150, 250 80, 400 90 C 550 100, 700 40, 850 60 C 950 70, 1000 30, 1000 30 L 1000 200 Z" fill="url(#trend-gradient)"></path>
+<!-- Data Line -->
+<path d="M0 120 C 150 150, 250 80, 400 90 C 550 100, 700 40, 850 60 C 950 70, 1000 30, 1000 30" fill="none" stroke="theme('colors.primary')" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"></path>
+<!-- Data Points -->
+<circle cx="250" cy="80" fill="theme('colors.surface-container')" r="4" stroke="theme('colors.primary')" stroke-width="2"></circle>
+<circle cx="700" cy="40" fill="theme('colors.surface-container')" r="4" stroke="theme('colors.primary')" stroke-width="2"></circle>
+</svg>
+</div>
+<!-- X-Axis Labels -->
+<div class="flex justify-between text-label-md font-label-md text-on-surface-variant mt-2 px-2 z-10 relative">
+<span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span><span>Sun</span>
+</div>
+</div>
+<!-- Issues by Status (Donut Chart) -->
+<div class="bg-surface-container border border-outline-variant rounded-xl p-5 md:p-6 flex flex-col h-[340px] hover:border-outline transition-colors">
+<h2 class="text-title-lg font-title-lg text-on-surface mb-6">Issues by Status</h2>
+<div class="flex-grow flex items-center justify-center relative">
+<!-- Donut implementation -->
+<div class="w-48 h-48 rounded-full donut-chart flex items-center justify-center relative shadow-lg shadow-black/20">
+<div class="w-36 h-36 rounded-full bg-surface-container flex flex-col items-center justify-center z-10">
+<span class="text-headline-sm font-headline-sm text-on-surface">342</span>
+<span class="text-label-md font-label-md text-on-surface-variant">Total Issues</span>
+</div>
+</div>
+</div>
+<!-- Legend -->
+<div class="mt-6 flex flex-wrap justify-center gap-4">
+<div class="flex items-center gap-2"><span class="w-3 h-3 rounded-sm bg-primary"></span><span class="text-label-md font-label-md text-on-surface-variant">Open (45%)</span></div>
+<div class="flex items-center gap-2"><span class="w-3 h-3 rounded-sm bg-tertiary"></span><span class="text-label-md font-label-md text-on-surface-variant">In Progress (30%)</span></div>
+<div class="flex items-center gap-2"><span class="w-3 h-3 rounded-sm bg-secondary"></span><span class="text-label-md font-label-md text-on-surface-variant">Resolved (15%)</span></div>
+</div>
+</div>
+<!-- Issues by Priority (Horizontal Bar) -->
+<div class="bg-surface-container border border-outline-variant rounded-xl p-5 md:p-6 flex flex-col h-[340px] hover:border-outline transition-colors">
+<h2 class="text-title-lg font-title-lg text-on-surface mb-6">Issues by Priority</h2>
+<div class="flex-grow flex flex-col justify-center gap-6">
+<!-- High Priority -->
+<div>
+<div class="flex justify-between text-label-md font-label-md mb-2">
+<span class="text-error font-semibold flex items-center gap-1"><span class="material-symbols-outlined text-[16px]">priority_high</span> Critical</span>
+<span class="text-on-surface">42</span>
+</div>
+<div class="w-full h-2 bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-error rounded-full" style="width: 15%"></div>
+</div>
+</div>
+<!-- Medium Priority -->
+<div>
+<div class="flex justify-between text-label-md font-label-md mb-2">
+<span class="text-warning font-semibold flex items-center gap-1"><span class="material-symbols-outlined text-[16px]">warning</span> High</span>
+<span class="text-on-surface">128</span>
+</div>
+<div class="w-full h-2 bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-warning rounded-full" style="width: 45%"></div>
+</div>
+</div>
+<!-- Low Priority -->
+<div>
+<div class="flex justify-between text-label-md font-label-md mb-2">
+<span class="text-primary font-semibold flex items-center gap-1"><span class="material-symbols-outlined text-[16px]">info</span> Normal</span>
+<span class="text-on-surface">172</span>
+</div>
+<div class="w-full h-2 bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-primary rounded-full" style="width: 60%"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Issues by Category (Vertical Bar) -->
+<div class="bg-surface-container border border-outline-variant rounded-xl p-5 md:p-6 flex flex-col h-[340px] hover:border-outline transition-colors">
+<h2 class="text-title-lg font-title-lg text-on-surface mb-6">Issues by Category</h2>
+<div class="flex-grow flex items-end justify-between gap-2 px-2 pb-2 mt-4 border-b border-outline-variant">
+<!-- Bar 1 -->
+<div class="flex flex-col items-center gap-2 flex-1 group">
+<span class="text-label-md font-label-md text-on-surface opacity-0 group-hover:opacity-100 transition-opacity">120</span>
+<div class="w-full max-w-[32px] bg-primary rounded-t-sm h-[80%] hover:bg-primary-container transition-colors"></div>
+</div>
+<!-- Bar 2 -->
+<div class="flex flex-col items-center gap-2 flex-1 group">
+<span class="text-label-md font-label-md text-on-surface opacity-0 group-hover:opacity-100 transition-opacity">85</span>
+<div class="w-full max-w-[32px] bg-secondary rounded-t-sm h-[55%] hover:bg-secondary-container transition-colors"></div>
+</div>
+<!-- Bar 3 -->
+<div class="flex flex-col items-center gap-2 flex-1 group">
+<span class="text-label-md font-label-md text-on-surface opacity-0 group-hover:opacity-100 transition-opacity">64</span>
+<div class="w-full max-w-[32px] bg-tertiary rounded-t-sm h-[40%] hover:bg-tertiary-container transition-colors"></div>
+</div>
+<!-- Bar 4 -->
+<div class="flex flex-col items-center gap-2 flex-1 group">
+<span class="text-label-md font-label-md text-on-surface opacity-0 group-hover:opacity-100 transition-opacity">40</span>
+<div class="w-full max-w-[32px] bg-surface-container-highest border border-outline-variant rounded-t-sm h-[25%] hover:bg-surface-bright transition-colors"></div>
+</div>
+</div>
+<div class="flex justify-between text-label-md font-label-md text-on-surface-variant mt-3 px-2">
+<span class="truncate w-12 text-center" title="Network">Net</span>
+<span class="truncate w-12 text-center" title="Hardware">HW</span>
+<span class="truncate w-12 text-center" title="Software">SW</span>
+<span class="truncate w-12 text-center" title="Access">Acc</span>
+</div>
+</div>
+</div>
+</main>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center h-20 px-2 pb-safe border-t border-outline-variant dark:border-outline-variant bg-surface-container dark:bg-surface-container md:hidden rounded-t-xl flat no shadows">
+<!-- Dashboard (Inactive) -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant px-5 py-1 hover:text-on-surface dark:hover:text-on-surface transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="text-label-md font-label-md mt-1">Dashboard</span>
+</a>
+<!-- Issues (Inactive) -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant px-5 py-1 hover:text-on-surface dark:hover:text-on-surface transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="warning">warning</span>
+<span class="text-label-md font-label-md mt-1">Issues</span>
+</a>
+<!-- Reports (Active Semantic Lock) -->
+<a class="flex flex-col items-center justify-center bg-secondary-container dark:bg-secondary-container text-on-secondary-container dark:text-on-secondary-container rounded-full px-5 py-1 scale-95 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="assessment" style="font-variation-settings: 'FILL' 1;">assessment</span>
+<span class="text-label-md font-label-md mt-1">Reports</span>
+</a>
+<!-- Settings (Inactive) -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant px-5 py-1 hover:text-on-surface dark:hover:text-on-surface transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="text-label-md font-label-md mt-1">Settings</span>
+</a>
+</nav>
+</body></html>

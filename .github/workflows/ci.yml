@@ -1,0 +1,51 @@
+name: CI Pipeline
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+
+jobs:
+  backend-tests:
+    name: Backend Tests & Prisma Verification
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: smart_campus_fix
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: "npm"
+          cache-dependency-path: backend/package-lock.json
+
+      - name: Install Dependencies
+        run: npm --prefix backend ci
+
+      - name: Deploy Prisma Migrations
+        env:
+          DATABASE_URL: "postgresql://postgres:postgres@localhost:5432/smart_campus_fix?schema=public"
+        run: npm --prefix backend run migrate:deploy
+
+      - name: Run Backend Tests
+        env:
+          DATABASE_URL: "postgresql://postgres:postgres@localhost:5432/smart_campus_fix?schema=public"
+          NODE_ENV: test
+        run: npm --prefix backend test

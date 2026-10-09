@@ -1,0 +1,6 @@
+{
+  "name": "InfraCare",
+  "description": "Flutter 3.x Material 3 mobile application UI for campus infrastructure management",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Settings - InfraCare Admin</title>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Config -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary-fixed": "#ffdcc6",
+                        "surface-container": "#1e2330",
+                        "surface-container-highest": "#333848",
+                        "success": "#10b981",
+                        "on-primary-fixed": "#001a42",
+                        "secondary-container": "#3a4a5f",
+                        "on-secondary-fixed-variant": "#38485d",
+                        "on-surface-variant": "#c2c6d6",
+                        "background": "#10131a",
+                        "error-container": "#93000a",
+                        "primary": "#adc6ff",
+                        "surface": "#0f131f",
+                        "on-secondary-container": "#a9bad3",
+                        "surface-container-high": "#272a31",
+                        "tertiary": "#ffb786",
+                        "secondary": "#b7c8e1",
+                        "error": "#ef4444",
+                        "on-surface": "#e1e2ec",
+                        "primary-fixed": "#d8e2ff",
+                        "surface-bright": "#363941",
+                        "primary-fixed-dim": "#adc6ff",
+                        "on-primary": "#002e6a",
+                        "on-tertiary-fixed-variant": "#723600",
+                        "secondary-fixed-dim": "#b7c8e1",
+                        "on-tertiary-fixed": "#311400",
+                        "on-error-container": "#ffdad6",
+                        "primary-container": "#4d8eff",
+                        "surface-container-lowest": "#0a0e1a",
+                        "warning": "#f59e0b",
+                        "inverse-surface": "#e1e2ec",
+                        "surface-dim": "#0f131f",
+                        "on-secondary-fixed": "#0b1c30",
+                        "surface-container-low": "#191b23",
+                        "surface-tint": "#adc6ff",
+                        "on-error": "#690005",
+                        "outline-variant": "#424754",
+                        "on-background": "#e1e2ec",
+                        "surface-variant": "#32353c",
+                        "outline": "#475569",
+                        "inverse-primary": "#005ac2",
+                        "on-tertiary-container": "#461f00",
+                        "tertiary-container": "#df7412",
+                        "on-primary-container": "#00285d",
+                        "tertiary-fixed-dim": "#ffb786",
+                        "inverse-on-surface": "#2e3038",
+                        "on-primary-fixed-variant": "#004395",
+                        "on-secondary": "#213145",
+                        "secondary-fixed": "#d3e4fe",
+                        "on-tertiary": "#502400"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "gutter": "24px",
+                        "unit": "4px",
+                        "margin": "24px",
+                        "container-max": "1440px"
+                    },
+                    "fontFamily": {
+                        "title-lg": ["Plus Jakarta Sans", "sans-serif"],
+                        "label-lg": ["Plus Jakarta Sans", "sans-serif"],
+                        "body-md": ["Plus Jakarta Sans", "sans-serif"],
+                        "label-md": ["Plus Jakarta Sans", "sans-serif"],
+                        "body-lg": ["Plus Jakarta Sans", "sans-serif"],
+                        "headline-sm": ["Plus Jakarta Sans", "sans-serif"]
+                    },
+                    "fontSize": {
+                        "title-lg": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "label-lg": ["14px", { "lineHeight": "20px", "letterSpacing": "0.1px", "fontWeight": "500" }],
+                        "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "label-md": ["12px", { "lineHeight": "16px", "fontWeight": "500" }],
+                        "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-sm": ["24px", { "lineHeight": "32px", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600&display=swap');
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen font-body-md antialiased pt-16 pb-20 md:pb-0">
+<!-- TopAppBar -->
+<header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-gutter h-16 bg-surface dark:bg-surface border-b border-outline-variant dark:border-outline-variant">
+<!-- Leading -->
+<button class="flex items-center justify-center p-2 rounded-full text-primary dark:text-primary hover:bg-surface-container-high dark:hover:bg-surface-container-high transition-colors active:scale-95 duration-150">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<!-- Headline -->
+<div class="text-title-lg font-title-lg font-bold text-primary dark:text-primary">
+            Admin Dashboard
+        </div>
+<!-- Trailing Avatar -->
+<div class="h-8 w-8 rounded-full overflow-hidden border border-outline-variant">
+<img class="w-full h-full object-cover" data-alt="A highly detailed close-up portrait of a professional system administrator in a dark, high-tech server room environment. The lighting is dramatic, cool-toned, and reflects off subtle tech surfaces." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDroDoXLycM88GTpmPcbDMvs8cWRJ2J4crgjyiobBPoSayDYLF99Ls-lA15LzV-hgnr7tf-6XrYuFCX8yEwHy8lOeomjhkx1inQUtU63CloA7BS__idRZnvvOl-L3Oo5ceEga2qSWbzhaPgyd4GLKKYLNTIGCG4EJAtfgzUqpf0CLLlVEH3fRWK3qbgNKoqjrpoBIs1k3kDNPblveFjK4Q0lU8a1CLmzRlSUF7sogk-o-tlcUYbOZj8ZQ"/>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="max-w-container-max mx-auto px-4 md:px-gutter py-8 space-y-6">
+<!-- User Profile Section -->
+<section class="flex flex-col items-center justify-center py-8">
+<div class="h-24 w-24 rounded-full overflow-hidden border-2 border-primary mb-4 relative">
+<img class="w-full h-full object-cover" data-alt="A sharp, well-lit avatar image of a lead software engineer or IT admin, slightly smiling, set against a dark, moody cyber-security center background with glowing blue screens out of focus." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAwfHE7NeqpEpDhK-p69D1v_Jxdrvp2fZEc34e60nHuQatxwh1W16ODX4ltalneA22Q3vcwpgP882YTP2sLoj4ym53hBJHKch_9vs0tQlE4DxidC_FcXo_MhIZyPVODALugt65T70b5JCWi5ZhudFPtT_ExP-sLP27a2sA91sD25VrbHb5jBfyr8-R-LeasBtNe4jV-_Bc5wgUwBtnen05elmMekIP8tqx6ZZcObse-GhCNPIATqNywTQ"/>
+</div>
+<h2 class="text-headline-sm font-headline-sm text-on-surface">Administrator</h2>
+<p class="text-body-md font-body-md text-on-surface-variant mt-1">admin@infracare.com</p>
+</section>
+<!-- Settings List -->
+<section class="max-w-2xl mx-auto space-y-2">
+<!-- Item: About -->
+<button class="w-full flex items-center justify-between p-4 rounded-xl bg-surface-container dark:bg-surface-container hover:bg-surface-container-high transition-colors text-left border border-outline-variant/30">
+<div class="flex items-center space-x-4">
+<span class="material-symbols-outlined text-primary">info</span>
+<span class="text-label-lg font-label-lg text-on-surface">About InfraCare</span>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant text-sm">chevron_right</span>
+</button>
+<!-- Item: Help & FAQ -->
+<button class="w-full flex items-center justify-between p-4 rounded-xl bg-surface-container dark:bg-surface-container hover:bg-surface-container-high transition-colors text-left border border-outline-variant/30">
+<div class="flex items-center space-x-4">
+<span class="material-symbols-outlined text-primary">help</span>
+<span class="text-label-lg font-label-lg text-on-surface">Help &amp; FAQ</span>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant text-sm">chevron_right</span>
+</button>
+<!-- Item: Privacy Policy -->
+<button class="w-full flex items-center justify-between p-4 rounded-xl bg-surface-container dark:bg-surface-container hover:bg-surface-container-high transition-colors text-left border border-outline-variant/30">
+<div class="flex items-center space-x-4">
+<span class="material-symbols-outlined text-primary">policy</span>
+<span class="text-label-lg font-label-lg text-on-surface">Privacy Policy</span>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant text-sm">chevron_right</span>
+</button>
+<!-- Item: Terms & Conditions -->
+<button class="w-full flex items-center justify-between p-4 rounded-xl bg-surface-container dark:bg-surface-container hover:bg-surface-container-high transition-colors text-left border border-outline-variant/30">
+<div class="flex items-center space-x-4">
+<span class="material-symbols-outlined text-primary">gavel</span>
+<span class="text-label-lg font-label-lg text-on-surface">Terms &amp; Conditions</span>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant text-sm">chevron_right</span>
+</button>
+</section>
+<!-- System Info & Actions -->
+<section class="max-w-2xl mx-auto mt-8 pt-6 border-t border-outline-variant flex flex-col md:flex-row justify-between items-center gap-4">
+<div class="text-label-md font-label-md text-on-surface-variant flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px]">verified</span>
+                App Version (v2.4.0)
+            </div>
+<button class="flex items-center gap-2 px-6 py-2.5 rounded-lg bg-surface-container border border-error text-error hover:bg-error-container hover:text-on-error-container transition-colors font-label-lg text-label-lg w-full md:w-auto justify-center">
+<span class="material-symbols-outlined">logout</span>
+                Logout
+            </button>
+</section>
+</main>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full z-50 flex justify-around items-center h-20 px-2 pb-safe bg-surface-container dark:bg-surface-container border-t border-outline-variant dark:border-outline-variant rounded-t-xl">
+<!-- Dashboard (Inactive) -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant px-5 py-1 hover:text-on-surface dark:hover:text-on-surface transition-colors w-full h-full" href="#">
+<span class="material-symbols-outlined mb-1">dashboard</span>
+<span class="text-label-md font-label-md">Dashboard</span>
+</a>
+<!-- Issues (Inactive) -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant px-5 py-1 hover:text-on-surface dark:hover:text-on-surface transition-colors w-full h-full" href="#">
+<span class="material-symbols-outlined mb-1">warning</span>
+<span class="text-label-md font-label-md">Issues</span>
+</a>
+<!-- Reports (Inactive) -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant px-5 py-1 hover:text-on-surface dark:hover:text-on-surface transition-colors w-full h-full" href="#">
+<span class="material-symbols-outlined mb-1">assessment</span>
+<span class="text-label-md font-label-md">Reports</span>
+</a>
+<!-- Settings (Active) -->
+<a class="flex flex-col items-center justify-center bg-secondary-container dark:bg-secondary-container text-on-secondary-container dark:text-on-secondary-container rounded-full px-5 py-1 scale-95 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined mb-1" style="font-variation-settings: 'FILL' 1;">settings</span>
+<span class="text-label-md font-label-md">Settings</span>
+</a>
+</nav>
+</body></html>

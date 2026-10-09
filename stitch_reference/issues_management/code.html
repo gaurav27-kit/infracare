@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>InfraCare - Issues Management</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "tertiary-fixed": "#ffdcc6",
+                      "surface-container": "#1e2330",
+                      "surface-container-highest": "#333848",
+                      "success": "#10b981",
+                      "on-primary-fixed": "#001a42",
+                      "secondary-container": "#3a4a5f",
+                      "on-secondary-fixed-variant": "#38485d",
+                      "on-surface-variant": "#c2c6d6",
+                      "background": "#10131a",
+                      "error-container": "#93000a",
+                      "primary": "#adc6ff",
+                      "surface": "#0f131f",
+                      "on-secondary-container": "#a9bad3",
+                      "surface-container-high": "#272a31",
+                      "tertiary": "#ffb786",
+                      "secondary": "#b7c8e1",
+                      "error": "#ef4444",
+                      "on-surface": "#e1e2ec",
+                      "primary-fixed": "#d8e2ff",
+                      "surface-bright": "#363941",
+                      "primary-fixed-dim": "#adc6ff",
+                      "on-primary": "#002e6a",
+                      "on-tertiary-fixed-variant": "#723600",
+                      "secondary-fixed-dim": "#b7c8e1",
+                      "on-tertiary-fixed": "#311400",
+                      "on-error-container": "#ffdad6",
+                      "primary-container": "#4d8eff",
+                      "surface-container-lowest": "#0a0e1a",
+                      "warning": "#f59e0b",
+                      "inverse-surface": "#e1e2ec",
+                      "surface-dim": "#0f131f",
+                      "on-secondary-fixed": "#0b1c30",
+                      "surface-container-low": "#191b23",
+                      "surface-tint": "#adc6ff",
+                      "on-error": "#690005",
+                      "outline-variant": "#424754",
+                      "on-background": "#e1e2ec",
+                      "surface-variant": "#32353c",
+                      "outline": "#475569",
+                      "inverse-primary": "#005ac2",
+                      "on-tertiary-container": "#461f00",
+                      "tertiary-container": "#df7412",
+                      "on-primary-container": "#00285d",
+                      "tertiary-fixed-dim": "#ffb786",
+                      "inverse-on-surface": "#2e3038",
+                      "on-primary-fixed-variant": "#004395",
+                      "on-secondary": "#213145",
+                      "secondary-fixed": "#d3e4fe",
+                      "on-tertiary": "#502400"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "gutter": "24px",
+                      "unit": "4px",
+                      "margin": "24px",
+                      "container-max": "1440px"
+              },
+              "fontFamily": {
+                      "title-lg": [
+                              "Plus Jakarta Sans"
+                      ],
+                      "label-lg": [
+                              "Plus Jakarta Sans"
+                      ],
+                      "body-md": [
+                              "Plus Jakarta Sans"
+                      ],
+                      "label-md": [
+                              "Plus Jakarta Sans"
+                      ],
+                      "body-lg": [
+                              "Plus Jakarta Sans"
+                      ],
+                      "headline-sm": [
+                              "Plus Jakarta Sans"
+                      ]
+              },
+              "fontSize": {
+                      "title-lg": [
+                              "20px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "label-lg": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "letterSpacing": "0.1px",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "body-md": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "label-md": [
+                              "12px",
+                              {
+                                      "lineHeight": "16px",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "body-lg": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "headline-sm": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "fontWeight": "600"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+      </script>
+<style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen pb-24 md:pb-0 md:pt-16">
+<!-- TopAppBar (Web) -->
+<header class="hidden md:flex fixed top-0 left-0 w-full z-50 justify-between items-center px-gutter h-16 border-b border-outline-variant bg-surface text-primary">
+<div class="flex items-center gap-4">
+<button class="hover:bg-surface-container-high transition-colors p-2 rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined text-title-lg" data-icon="menu">menu</span>
+</button>
+<h1 class="text-title-lg font-title-lg font-bold">Admin Dashboard</h1>
+</div>
+<div class="flex items-center gap-6">
+<nav class="flex gap-6">
+<a class="text-on-surface-variant hover:text-on-surface text-label-md font-label-md transition-colors" href="#">Dashboard</a>
+<a class="text-primary font-bold text-label-md font-label-md transition-colors" href="#">Issues</a>
+<a class="text-on-surface-variant hover:text-on-surface text-label-md font-label-md transition-colors" href="#">Reports</a>
+<a class="text-on-surface-variant hover:text-on-surface text-label-md font-label-md transition-colors" href="#">Settings</a>
+</nav>
+<div class="w-8 h-8 rounded-full overflow-hidden border border-outline-variant">
+<img class="w-full h-full object-cover" data-alt="A professional headshot of an IT systems administrator in a dark, high-tech server room environment, illuminated by cool blue screen light." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAZKu0rETOe4m35mtq-24DdJmu5qtyH2yD6vz2YcEd23dEd4RuL3TNC825iNlvCKkq07IFWpvr6BzUnpOPY6SmgVX45omCnS4WSp61QhuahC14mkCN4XOYi1GiwbkyrBvUVZLOFBrWR0RwOS9EiXI0FzwWjOvj3TnANBtDU680UxXW6P_NIeaoewBREp6sGnGl00V337_fSSKzXALqeREDtJkZ3FUmXP32-ts8O5_FCe8InlHbJ2mEP6g"/>
+</div>
+</div>
+</header>
+<!-- Main Content -->
+<main class="max-w-container-max mx-auto px-4 md:px-gutter pt-6 md:pt-8 flex flex-col gap-6">
+<!-- Header & Search -->
+<div class="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+<h2 class="text-headline-sm font-headline-sm text-on-surface">Issues Management</h2>
+<div class="flex-1 w-full md:max-w-md relative group">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant group-focus-within:text-primary transition-colors" data-icon="search">search</span>
+<input class="w-full bg-surface-container border border-outline-variant rounded-full py-2 pl-10 pr-4 text-body-md font-body-md text-on-surface placeholder:text-on-surface-variant focus:border-primary focus:ring-1 focus:ring-primary transition-all outline-none" placeholder="Search issues..." type="text"/>
+</div>
+</div>
+<!-- Filters -->
+<div class="flex gap-3 overflow-x-auto hide-scrollbar pb-2">
+<button class="whitespace-nowrap bg-primary-container text-on-primary-container px-4 py-1.5 rounded-full text-label-md font-label-md flex items-center gap-2 border border-transparent">
+                All Issues
+            </button>
+<button class="whitespace-nowrap bg-surface-container border border-outline-variant hover:border-outline text-on-surface-variant hover:text-on-surface px-4 py-1.5 rounded-full text-label-md font-label-md flex items-center gap-2 transition-all">
+                Status: Open <span class="material-symbols-outlined text-[16px]" data-icon="arrow_drop_down">arrow_drop_down</span>
+</button>
+<button class="whitespace-nowrap bg-surface-container border border-outline-variant hover:border-outline text-on-surface-variant hover:text-on-surface px-4 py-1.5 rounded-full text-label-md font-label-md flex items-center gap-2 transition-all">
+                Priority: Any <span class="material-symbols-outlined text-[16px]" data-icon="arrow_drop_down">arrow_drop_down</span>
+</button>
+<button class="whitespace-nowrap bg-surface-container border border-outline-variant hover:border-outline text-on-surface-variant hover:text-on-surface px-4 py-1.5 rounded-full text-label-md font-label-md flex items-center gap-2 transition-all">
+                Department: Any <span class="material-symbols-outlined text-[16px]" data-icon="arrow_drop_down">arrow_drop_down</span>
+</button>
+</div>
+<!-- Issues List -->
+<div class="flex flex-col gap-4">
+<!-- Card 1 -->
+<div class="bg-surface-container rounded-xl border border-outline-variant p-4 flex flex-col md:flex-row md:items-center justify-between gap-4 hover:bg-surface-container-high transition-colors cursor-pointer group relative overflow-hidden">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-error"></div>
+<div class="flex-1 pl-2">
+<div class="flex items-center gap-3 mb-1">
+<span class="text-label-md font-label-md text-on-surface-variant font-mono">ISS-0012</span>
+<div class="flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-error"></span>
+<span class="text-label-md font-label-md text-error">HIGH</span>
+</div>
+<span class="px-2 py-0.5 rounded text-[10px] font-bold tracking-wider uppercase bg-surface-container-highest text-on-surface border border-outline-variant">Open</span>
+</div>
+<h3 class="text-title-lg font-title-lg text-on-surface mb-1 group-hover:text-primary transition-colors">Broken Projector</h3>
+<div class="flex flex-wrap items-center gap-x-4 gap-y-2 text-body-md font-body-md text-on-surface-variant">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[18px]" data-icon="location_on">location_on</span> Engineering Block A</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[18px]" data-icon="electrical_services">electrical_services</span> Electrical</span>
+</div>
+</div>
+<div class="flex md:flex-col items-center md:items-end justify-between md:justify-center gap-2 border-t md:border-t-0 md:border-l border-outline-variant pt-3 md:pt-0 md:pl-4 pl-2">
+<span class="text-label-md font-label-md text-on-surface-variant flex items-center gap-1"><span class="material-symbols-outlined text-[16px]" data-icon="schedule">schedule</span> Reported: 2h ago</span>
+<button class="text-primary hover:text-primary-container text-label-md font-label-md font-bold flex items-center gap-1 transition-colors">
+                         View Details <span class="material-symbols-outlined text-[18px]" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="bg-surface-container rounded-xl border border-outline-variant p-4 flex flex-col md:flex-row md:items-center justify-between gap-4 hover:bg-surface-container-high transition-colors cursor-pointer group relative overflow-hidden">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-error-container"></div>
+<div class="flex-1 pl-2">
+<div class="flex items-center gap-3 mb-1">
+<span class="text-label-md font-label-md text-on-surface-variant font-mono">ISS-0011</span>
+<div class="flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-error-container"></span>
+<span class="text-label-md font-label-md text-on-error-container">CRITICAL</span>
+</div>
+<span class="px-2 py-0.5 rounded text-[10px] font-bold tracking-wider uppercase bg-secondary-container text-on-secondary-container border border-outline-variant">In Progress</span>
+</div>
+<h3 class="text-title-lg font-title-lg text-on-surface mb-1 group-hover:text-primary transition-colors">Elevator Stuck</h3>
+<div class="flex flex-wrap items-center gap-x-4 gap-y-2 text-body-md font-body-md text-on-surface-variant">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[18px]" data-icon="location_on">location_on</span> Main Hall</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[18px]" data-icon="precision_manufacturing">precision_manufacturing</span> Mechanical</span>
+</div>
+</div>
+<div class="flex md:flex-col items-center md:items-end justify-between md:justify-center gap-2 border-t md:border-t-0 md:border-l border-outline-variant pt-3 md:pt-0 md:pl-4 pl-2">
+<span class="text-label-md font-label-md text-on-surface-variant flex items-center gap-1"><span class="material-symbols-outlined text-[16px]" data-icon="schedule">schedule</span> Reported: 5h ago</span>
+<button class="text-primary hover:text-primary-container text-label-md font-label-md font-bold flex items-center gap-1 transition-colors">
+                         View Details <span class="material-symbols-outlined text-[18px]" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="bg-surface-container rounded-xl border border-outline-variant p-4 flex flex-col md:flex-row md:items-center justify-between gap-4 hover:bg-surface-container-high transition-colors cursor-pointer group relative overflow-hidden opacity-75">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-success"></div>
+<div class="flex-1 pl-2">
+<div class="flex items-center gap-3 mb-1">
+<span class="text-label-md font-label-md text-on-surface-variant font-mono">ISS-0010</span>
+<div class="flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+<span class="text-label-md font-label-md text-secondary">LOW</span>
+</div>
+<span class="px-2 py-0.5 rounded text-[10px] font-bold tracking-wider uppercase bg-surface-container-highest text-success border border-outline-variant">Resolved</span>
+</div>
+<h3 class="text-title-lg font-title-lg text-on-surface mb-1 group-hover:text-primary transition-colors line-through decoration-outline">Flickering Lights</h3>
+<div class="flex flex-wrap items-center gap-x-4 gap-y-2 text-body-md font-body-md text-on-surface-variant">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[18px]" data-icon="location_on">location_on</span> Lab 304</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[18px]" data-icon="electrical_services">electrical_services</span> Electrical</span>
+</div>
+</div>
+<div class="flex md:flex-col items-center md:items-end justify-between md:justify-center gap-2 border-t md:border-t-0 md:border-l border-outline-variant pt-3 md:pt-0 md:pl-4 pl-2">
+<span class="text-label-md font-label-md text-on-surface-variant flex items-center gap-1"><span class="material-symbols-outlined text-[16px]" data-icon="schedule">schedule</span> Reported: 1d ago</span>
+<button class="text-primary hover:text-primary-container text-label-md font-label-md font-bold flex items-center gap-1 transition-colors">
+                         View Details <span class="material-symbols-outlined text-[18px]" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+</main>
+<!-- BottomNavBar (Mobile) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full z-50 flex justify-around items-center h-20 px-2 pb-safe border-t border-outline-variant bg-surface-container text-primary rounded-t-xl flat no shadows">
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-5 py-1 hover:text-on-surface transition-transform duration-200" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="dashboard">dashboard</span>
+<span class="text-label-md font-label-md">Dashboard</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container rounded-full px-5 py-1 scale-95 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="warning" data-weight="fill" style="font-variation-settings: 'FILL' 1;">warning</span>
+<span class="text-label-md font-label-md">Issues</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-5 py-1 hover:text-on-surface transition-transform duration-200" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="assessment">assessment</span>
+<span class="text-label-md font-label-md">Reports</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-5 py-1 hover:text-on-surface transition-transform duration-200" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="settings">settings</span>
+<span class="text-label-md font-label-md">Settings</span>
+</a>
+</nav>
+</body></html>

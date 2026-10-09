@@ -1,0 +1,312 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+// ─── Enums ────────────────────────────────────────────────────────────────────
+
+enum SpaceType {
+  CLASSROOM
+  LABORATORY
+  OFFICE
+  LIBRARY
+  SEMINAR_HALL
+  WORKSHOP
+  CORRIDOR
+  STAIRCASE
+  WASHROOM
+  CAFETERIA
+  HOSTEL_ROOM
+  STORE_ROOM
+  SERVER_ROOM
+  ELECTRICAL_ROOM
+  OTHER
+}
+
+enum AssetStatus {
+  OPERATIONAL
+  FAULTY
+  UNDER_MAINTENANCE
+  DECOMMISSIONED
+}
+
+enum IssuePriority {
+  LOW
+  MEDIUM
+  HIGH
+  CRITICAL
+}
+
+enum IssueStatus {
+  OPEN
+  ASSIGNED
+  IN_PROGRESS
+  RESOLVED
+  CLOSED
+}
+
+enum WorkOrderPriority {
+  LOW
+  MEDIUM
+  HIGH
+  EMERGENCY
+}
+
+enum WorkOrderStatus {
+  SCHEDULED
+  IN_PROGRESS
+  ON_HOLD
+  COMPLETED
+  CANCELLED
+}
+
+enum MaintenanceType {
+  PREVENTIVE
+  CORRECTIVE
+  EMERGENCY
+}
+
+// ─── Models ───────────────────────────────────────────────────────────────────
+
+model Campus {
+  id                      String     @id @default(uuid()) @db.Uuid
+  name                    String
+  code                    String     @unique
+  description             String?    @db.Text
+  address                 String?    @db.Text
+  phone                   String?    @db.VarChar(50)
+  email                   String?    @db.VarChar(255)
+  website                 String?    @db.VarChar(255)
+  logoUrl                 String?    @db.Text
+  buildings               Building[]
+  
+  // Audits & Soft-Delete
+  createdAt               DateTime   @default(now())
+  updatedAt               DateTime   @updatedAt
+  createdByExternalUserId String?    @db.VarChar(255)
+  updatedByExternalUserId String?    @db.VarChar(255)
+  deletedAt               DateTime?
+
+  @@map("campuses")
+}
+
+model Building {
+  id                      String    @id @default(uuid()) @db.Uuid
+  campusId                String    @db.Uuid
+  campus                  Campus    @relation(fields: [campusId], references: [id], onDelete: Restrict)
+  name                    String
+  code                    String    @unique
+  floors                  Floor[]
+
+  // Audits & Soft-Delete
+  createdAt               DateTime  @default(now())
+  updatedAt               DateTime  @updatedAt
+  createdByExternalUserId String?   @db.VarChar(255)
+  updatedByExternalUserId String?   @db.VarChar(255)
+  deletedAt               DateTime?
+
+  @@map("buildings")
+}
+
+model Floor {
+  id                      String    @id @default(uuid()) @db.Uuid
+  buildingId              String    @db.Uuid
+  building                Building  @relation(fields: [buildingId], references: [id], onDelete: Restrict)
+  level                   Int
+  name                    String
+  spaces                  Space[]
+
+  // Audits & Soft-Delete
+  createdAt               DateTime  @default(now())
+  updatedAt               DateTime  @updatedAt
+  createdByExternalUserId String?   @db.VarChar(255)
+  updatedByExternalUserId String?   @db.VarChar(255)
+  deletedAt               DateTime?
+
+  @@unique([buildingId, level])
+  @@map("floors")
+}
+
+model Space {
+  id                      String    @id @default(uuid()) @db.Uuid
+  floorId                 String    @db.Uuid
+  floor                   Floor     @relation(fields: [floorId], references: [id], onDelete: Restrict)
+  name                    String
+  code                    String    @unique
+  type                    SpaceType
+  capacity                Int?
+  isAccessible            Boolean   @default(false)
+  isActive                Boolean   @default(true)
+  assets                  Asset[]
+  issues                  Issue[]
+
+  // Audits & Soft-Delete
+  createdAt               DateTime  @default(now())
+  updatedAt               DateTime  @updatedAt
+  createdByExternalUserId String?   @db.VarChar(255)
+  updatedByExternalUserId String?   @db.VarChar(255)
+  deletedAt               DateTime?
+
+  @@unique([floorId, name])
+  @@map("spaces")
+}
+
+model AssetCategory {
+  id                      String    @id @default(uuid()) @db.Uuid
+  name                    String    @unique
+  description             String?   @db.Text
+  assets                  Asset[]
+
+  // Audits & Soft-Delete
+  createdAt               DateTime  @default(now())
+  updatedAt               DateTime  @updatedAt
+  createdByExternalUserId String?   @db.VarChar(255)
+  updatedByExternalUserId String?   @db.VarChar(255)
+  deletedAt               DateTime?
+
+  @@map("asset_categories")
+}
+
+model Asset {
+  id                      String                     @id @default(uuid()) @db.Uuid
+  spaceId                 String                     @db.Uuid
+  space                   Space                      @relation(fields: [spaceId], references: [id], onDelete: Restrict)
+  categoryId              String                     @db.Uuid
+  category                AssetCategory              @relation(fields: [categoryId], references: [id], onDelete: Restrict)
+  name                    String
+  code                    String                     @unique
+  serialNumber            String?                    @unique
+  qrCode                  String?                    @unique @db.VarChar(255)
+  status                  AssetStatus                @default(OPERATIONAL)
+  issues                  Issue[]
+  maintenanceHistories    AssetMaintenanceHistory[]
+
+  // Audits & Soft-Delete
+  createdAt               DateTime                   @default(now())
+  updatedAt               DateTime                   @updatedAt
+  createdByExternalUserId String?                    @db.VarChar(255)
+  updatedByExternalUserId String?                    @db.VarChar(255)
+  deletedAt               DateTime?
+
+  @@map("assets")
+}
+
+model Issue {
+  id                      String            @id @default(uuid()) @db.Uuid
+  issueNumber             String?           @unique @db.VarChar(50)
+  spaceId                 String            @db.Uuid
+  space                   Space             @relation(fields: [spaceId], references: [id], onDelete: Restrict)
+  assetId                 String?           @db.Uuid
+  asset                   Asset?            @relation(fields: [assetId], references: [id], onDelete: Restrict)
+  customAssetName         String?           @db.VarChar(255)
+  title                   String
+  description             String            @db.Text
+  priority                IssuePriority     @default(MEDIUM)
+  status                  IssueStatus       @default(OPEN)
+  reporterExternalUserId  String            @db.VarChar(255)
+  attachments             IssueAttachment[]
+  comments                IssueComment[]
+  workOrders              WorkOrder[]
+
+  // Audits & Soft-Delete
+  createdAt               DateTime          @default(now())
+  updatedAt               DateTime          @updatedAt
+  createdByExternalUserId String?           @db.VarChar(255)
+  updatedByExternalUserId String?           @db.VarChar(255)
+  deletedAt               DateTime?
+
+  @@map("issues")
+}
+
+model IssueAttachment {
+  id         String   @id @default(uuid()) @db.Uuid
+  issueId    String   @db.Uuid
+  issue      Issue    @relation(fields: [issueId], references: [id], onDelete: Cascade)
+  fileName   String   @db.VarChar(255)
+  fileUrl    String   @db.Text
+  fileType   String   @db.VarChar(100)
+  uploadedAt DateTime @default(now())
+
+  @@map("issue_attachments")
+}
+
+model IssueComment {
+  id                    String    @id @default(uuid()) @db.Uuid
+  issueId               String    @db.Uuid
+  issue                 Issue     @relation(fields: [issueId], references: [id], onDelete: Cascade)
+  authorExternalUserId  String    @db.VarChar(255)
+  text                  String    @db.Text
+  
+  // Audits
+  createdAt             DateTime  @default(now())
+  updatedAt             DateTime  @updatedAt
+
+  @@map("issue_comments")
+}
+
+model MaintenanceDepartment {
+  id                      String      @id @default(uuid()) @db.Uuid
+  name                    String      @unique
+  code                    String      @unique
+  email                   String
+  phone                   String?
+  description             String?     @db.Text
+  isActive                Boolean     @default(true)
+  workOrders              WorkOrder[]
+
+  // Audits & Soft-Delete
+  createdAt               DateTime    @default(now())
+  updatedAt               DateTime    @updatedAt
+  createdByExternalUserId String?     @db.VarChar(255)
+  updatedByExternalUserId String?     @db.VarChar(255)
+  deletedAt               DateTime?
+
+  @@map("maintenance_departments")
+}
+
+model WorkOrder {
+  id                        String                 @id @default(uuid()) @db.Uuid
+  code                      String?                @unique @db.VarChar(50)
+  issueId                   String?                @db.Uuid
+  issue                     Issue?                 @relation(fields: [issueId], references: [id], onDelete: SetNull)
+  maintenanceDepartmentId   String                 @db.Uuid
+  maintenanceDepartment     MaintenanceDepartment  @relation(fields: [maintenanceDepartmentId], references: [id], onDelete: Restrict)
+  assignedToExternalUserId  String?                @db.VarChar(255)
+  priority                  WorkOrderPriority      @default(MEDIUM)
+  status                    WorkOrderStatus        @default(SCHEDULED)
+  scheduledStart            DateTime?
+  scheduledEnd              DateTime?
+  actualStart               DateTime?
+  actualEnd                 DateTime?
+  cost                      Decimal?               @db.Decimal(10, 2)
+  resolutionNotes           String?                @db.Text
+  maintenanceHistory        AssetMaintenanceHistory?
+
+  // Audits & Soft-Delete
+  createdAt                 DateTime               @default(now())
+  updatedAt                 DateTime               @updatedAt
+  createdByExternalUserId   String?                @db.VarChar(255)
+  updatedByExternalUserId   String?                @db.VarChar(255)
+  deletedAt                 DateTime?
+
+  @@map("work_orders")
+}
+
+model AssetMaintenanceHistory {
+  id                         String      @id @default(uuid()) @db.Uuid
+  assetId                    String      @db.Uuid
+  asset                      Asset       @relation(fields: [assetId], references: [id], onDelete: Restrict)
+  workOrderId                String      @unique @db.Uuid
+  workOrder                  WorkOrder   @relation(fields: [workOrderId], references: [id], onDelete: Restrict)
+  performedByExternalUserId  String      @db.VarChar(255)
+  type                       MaintenanceType
+  notes                      String      @db.Text
+  cost                       Decimal     @default(0.00) @db.Decimal(10, 2)
+  completedAt                DateTime    @default(now())
+
+  @@map("asset_maintenance_histories")
+}

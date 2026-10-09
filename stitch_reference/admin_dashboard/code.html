@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Admin Dashboard - InfraCare</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "tertiary-fixed": "#ffdcc6",
+                      "surface-container": "#1e2330",
+                      "surface-container-highest": "#333848",
+                      "success": "#10b981",
+                      "on-primary-fixed": "#001a42",
+                      "secondary-container": "#3a4a5f",
+                      "on-secondary-fixed-variant": "#38485d",
+                      "on-surface-variant": "#c2c6d6",
+                      "background": "#10131a",
+                      "error-container": "#93000a",
+                      "primary": "#adc6ff",
+                      "surface": "#0f131f",
+                      "on-secondary-container": "#a9bad3",
+                      "surface-container-high": "#272a31",
+                      "tertiary": "#ffb786",
+                      "secondary": "#b7c8e1",
+                      "error": "#ef4444",
+                      "on-surface": "#e1e2ec",
+                      "primary-fixed": "#d8e2ff",
+                      "surface-bright": "#363941",
+                      "primary-fixed-dim": "#adc6ff",
+                      "on-primary": "#002e6a",
+                      "on-tertiary-fixed-variant": "#723600",
+                      "secondary-fixed-dim": "#b7c8e1",
+                      "on-tertiary-fixed": "#311400",
+                      "on-error-container": "#ffdad6",
+                      "primary-container": "#4d8eff",
+                      "surface-container-lowest": "#0a0e1a",
+                      "warning": "#f59e0b",
+                      "inverse-surface": "#e1e2ec",
+                      "surface-dim": "#0f131f",
+                      "on-secondary-fixed": "#0b1c30",
+                      "surface-container-low": "#191b23",
+                      "surface-tint": "#adc6ff",
+                      "on-error": "#690005",
+                      "outline-variant": "#424754",
+                      "on-background": "#e1e2ec",
+                      "surface-variant": "#32353c",
+                      "outline": "#475569",
+                      "inverse-primary": "#005ac2",
+                      "on-tertiary-container": "#461f00",
+                      "tertiary-container": "#df7412",
+                      "on-primary-container": "#00285d",
+                      "tertiary-fixed-dim": "#ffb786",
+                      "inverse-on-surface": "#2e3038",
+                      "on-primary-fixed-variant": "#004395",
+                      "on-secondary": "#213145",
+                      "secondary-fixed": "#d3e4fe",
+                      "on-tertiary": "#502400"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "gutter": "24px",
+                      "unit": "4px",
+                      "margin": "24px",
+                      "container-max": "1440px"
+              },
+              "fontFamily": {
+                      "title-lg": [
+                              "Plus Jakarta Sans"
+                      ],
+                      "label-lg": [
+                              "Plus Jakarta Sans"
+                      ],
+                      "body-md": [
+                              "Plus Jakarta Sans"
+                      ],
+                      "label-md": [
+                              "Plus Jakarta Sans"
+                      ],
+                      "body-lg": [
+                              "Plus Jakarta Sans"
+                      ],
+                      "headline-sm": [
+                              "Plus Jakarta Sans"
+                      ]
+              },
+              "fontSize": {
+                      "title-lg": [
+                              "20px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "label-lg": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "letterSpacing": "0.1px",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "body-md": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "label-md": [
+                              "12px",
+                              {
+                                      "lineHeight": "16px",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "body-lg": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "headline-sm": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "fontWeight": "600"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+      </script>
+<style>
+          body {
+              font-family: 'Plus Jakarta Sans', sans-serif;
+              background-color: theme('colors.background');
+              color: theme('colors.on-background');
+          }
+          .material-symbols-outlined {
+            font-variation-settings:
+            'FILL' 1,
+            'wght' 400,
+            'GRAD' 0,
+            'opsz' 24
+          }
+      </style>
+</head>
+<body class="bg-background text-on-background min-h-screen pb-24 md:pb-0 flex flex-col md:flex-row">
+<!-- Desktop Sidebar (Navigation Rail) -->
+<aside class="hidden md:flex flex-col w-64 bg-surface-container-lowest border-r border-outline-variant h-screen fixed left-0 top-0 z-40">
+<div class="h-16 flex items-center px-6 border-b border-outline-variant">
+<span class="material-symbols-outlined text-primary mr-2" style="font-variation-settings: 'FILL' 1;">domain</span>
+<span class="font-title-lg text-title-lg text-primary font-bold">InfraCare</span>
+</div>
+<nav class="flex-1 py-6 px-4 space-y-2">
+<a class="flex items-center px-4 py-3 rounded-xl bg-secondary-container text-on-secondary-container transition-colors" href="#">
+<span class="material-symbols-outlined mr-3">dashboard</span>
+<span class="font-label-lg text-label-lg">Dashboard</span>
+</a>
+<a class="flex items-center px-4 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" href="#">
+<span class="material-symbols-outlined mr-3">warning</span>
+<span class="font-label-lg text-label-lg">Issues</span>
+</a>
+<a class="flex items-center px-4 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" href="#">
+<span class="material-symbols-outlined mr-3">assessment</span>
+<span class="font-label-lg text-label-lg">Reports</span>
+</a>
+<a class="flex items-center px-4 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" href="#">
+<span class="material-symbols-outlined mr-3">settings</span>
+<span class="font-label-lg text-label-lg">Settings</span>
+</a>
+</nav>
+</aside>
+<!-- Main Content Area -->
+<div class="flex-1 flex flex-col md:ml-64 w-full relative">
+<!-- TopAppBar -->
+<header class="fixed top-0 left-0 md:left-64 right-0 z-50 flex justify-between items-center px-gutter h-16 bg-surface dark:bg-surface border-b border-outline-variant dark:border-outline-variant">
+<div class="flex items-center">
+<button class="md:hidden mr-4 text-primary dark:text-primary p-2 -ml-2 rounded-full hover:bg-surface-container-high dark:hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined" data-icon="menu">menu</span>
+</button>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary md:hidden" style="font-variation-settings: 'FILL' 1;">domain</span>
+<h1 class="text-title-lg font-title-lg font-bold text-primary dark:text-primary hidden md:block">Admin Dashboard</h1>
+<h1 class="text-title-lg font-title-lg font-bold text-primary dark:text-primary md:hidden">InfraCare</h1>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="text-on-surface-variant p-2 rounded-full hover:bg-surface-container-high transition-colors relative">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-error rounded-full"></span>
+</button>
+<img alt="Admin profile picture" class="w-8 h-8 rounded-full object-cover border-2 border-surface-container-high" data-alt="A professional headshot of a middle-aged IT administrator with short grey hair and glasses, wearing a dark blue button-down shirt. The lighting is crisp and cool, casting subtle shadows to emphasize a sense of authority and competence. The background is a smoothly blurred corporate office setting with dark gray walls, perfectly matching a dark mode tech dashboard aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAWSWlAiLbhMu8s1nQxQrcC0gkgf2T4O8xgfhWz-6yRwHKzMOT28kdQYqyI7l-5PNtTGmDR4G-pYyMp_K3j4vMbGmqnxXtX9hDrEZ2rtZO3Q8jXzxHgOksztAhY2_12MZDf7lGS73W1lttyXY9yuZPdiHYtGaioBR3w85AATXcJl-ll8T845Fpunq3bvNdBs7e5WPWcUW5Hc9B7To6yUVy1euyAdXese8IjJ05omONFz2p0HrElCkWMjQ"/>
+</div>
+</header>
+<!-- Main Canvas -->
+<main class="flex-1 pt-24 px-4 md:px-margin max-w-[1440px] mx-auto w-full pb-8">
+<!-- Welcome Section -->
+<div class="mb-8">
+<h2 class="font-headline-sm text-headline-sm text-on-surface mb-1">System Overview</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Real-time status of facility infrastructure and open incidents.</p>
+</div>
+<!-- Stats Grid -->
+<div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+<div class="bg-surface-container rounded-xl p-5 border border-outline-variant hover:bg-surface-container-high transition-colors flex flex-col relative overflow-hidden">
+<div class="absolute -right-4 -top-4 w-16 h-16 bg-primary/10 rounded-full blur-xl"></div>
+<div class="flex justify-between items-start mb-4">
+<span class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Total Issues</span>
+<span class="material-symbols-outlined text-primary text-xl">dataset</span>
+</div>
+<div class="font-headline-sm text-headline-sm text-on-surface">124</div>
+<div class="font-label-md text-label-md text-success mt-2 flex items-center">
+<span class="material-symbols-outlined text-[14px] mr-1">trending_up</span>
+<span>+5% this week</span>
+</div>
+</div>
+<div class="bg-surface-container rounded-xl p-5 border border-outline-variant hover:bg-surface-container-high transition-colors flex flex-col relative overflow-hidden">
+<div class="absolute -right-4 -top-4 w-16 h-16 bg-warning/10 rounded-full blur-xl"></div>
+<div class="flex justify-between items-start mb-4">
+<span class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Open</span>
+<span class="material-symbols-outlined text-warning text-xl">pending_actions</span>
+</div>
+<div class="font-headline-sm text-headline-sm text-on-surface">12</div>
+<div class="font-label-md text-label-md text-on-surface-variant mt-2 flex items-center">
+<span>Requires attention</span>
+</div>
+</div>
+<div class="bg-surface-container rounded-xl p-5 border border-outline-variant hover:bg-surface-container-high transition-colors flex flex-col relative overflow-hidden">
+<div class="absolute -right-4 -top-4 w-16 h-16 bg-secondary/10 rounded-full blur-xl"></div>
+<div class="flex justify-between items-start mb-4">
+<span class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">In Progress</span>
+<span class="material-symbols-outlined text-secondary text-xl">engineering</span>
+</div>
+<div class="font-headline-sm text-headline-sm text-on-surface">45</div>
+<div class="font-label-md text-label-md text-on-surface-variant mt-2 flex items-center">
+<span>Currently assigned</span>
+</div>
+</div>
+<div class="bg-surface-container rounded-xl p-5 border border-outline-variant hover:bg-surface-container-high transition-colors flex flex-col relative overflow-hidden">
+<div class="absolute -right-4 -top-4 w-16 h-16 bg-error/10 rounded-full blur-xl"></div>
+<div class="flex justify-between items-start mb-4">
+<span class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Critical</span>
+<span class="material-symbols-outlined text-error text-xl">warning</span>
+</div>
+<div class="font-headline-sm text-headline-sm text-on-surface text-error">5</div>
+<div class="font-label-md text-label-md text-error mt-2 flex items-center">
+<span class="material-symbols-outlined text-[14px] mr-1">priority_high</span>
+<span>Immediate action required</span>
+</div>
+</div>
+</div>
+<!-- Recent Issues Section -->
+<div class="flex justify-between items-center mb-6">
+<h3 class="font-title-lg text-title-lg text-on-surface">Recent Issues</h3>
+<button class="font-label-md text-label-md text-primary flex items-center hover:text-primary-fixed transition-colors">
+                    View All <span class="material-symbols-outlined ml-1 text-[16px]">arrow_forward</span>
+</button>
+</div>
+<div class="flex flex-col gap-3">
+<!-- Issue Card 1 -->
+<div class="bg-surface-container rounded-lg border border-outline-variant p-4 flex flex-col md:flex-row md:items-center justify-between hover:bg-surface-container-high transition-colors cursor-pointer group">
+<div class="flex items-start md:items-center gap-4 mb-3 md:mb-0">
+<div class="w-10 h-10 rounded-full bg-error-container/20 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-error" data-icon="electrical_services">electrical_services</span>
+</div>
+<div>
+<div class="flex items-center gap-2 mb-1">
+<span class="font-label-md text-label-md text-on-surface-variant">ISS-0012</span>
+<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-error-container text-on-error-container">HIGH</span>
+</div>
+<h4 class="font-label-lg text-label-lg text-on-surface font-semibold group-hover:text-primary transition-colors">Broken Projector</h4>
+<p class="font-body-md text-body-md text-on-surface-variant flex items-center gap-1 mt-0.5">
+<span class="material-symbols-outlined text-[14px]">location_on</span>
+                                Engineering Block A
+                            </p>
+</div>
+</div>
+<div class="flex items-center justify-between md:justify-end gap-6 ml-14 md:ml-0">
+<div class="flex flex-col items-start md:items-end">
+<span class="font-label-md text-label-md text-on-surface-variant mb-1">Category</span>
+<span class="font-label-lg text-label-lg text-on-surface">Electrical</span>
+</div>
+<div class="flex flex-col items-start md:items-end w-24">
+<span class="font-label-md text-label-md text-on-surface-variant mb-1">Status</span>
+<div class="flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-warning"></span>
+<span class="font-label-lg text-label-lg text-on-surface">Open</span>
+</div>
+</div>
+<button class="hidden md:flex text-on-surface-variant hover:text-primary transition-colors p-2 rounded-full hover:bg-surface-container-highest">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</div>
+</div>
+<!-- Issue Card 2 -->
+<div class="bg-surface-container rounded-lg border border-outline-variant p-4 flex flex-col md:flex-row md:items-center justify-between hover:bg-surface-container-high transition-colors cursor-pointer group">
+<div class="flex items-start md:items-center gap-4 mb-3 md:mb-0">
+<div class="w-10 h-10 rounded-full bg-warning/20 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-warning" data-icon="ac_unit">ac_unit</span>
+</div>
+<div>
+<div class="flex items-center gap-2 mb-1">
+<span class="font-label-md text-label-md text-on-surface-variant">ISS-0015</span>
+<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-surface-container-highest text-warning">MEDIUM</span>
+</div>
+<h4 class="font-label-lg text-label-lg text-on-surface font-semibold group-hover:text-primary transition-colors">AC Leak</h4>
+<p class="font-body-md text-body-md text-on-surface-variant flex items-center gap-1 mt-0.5">
+<span class="material-symbols-outlined text-[14px]">location_on</span>
+                                Library Floor 2
+                            </p>
+</div>
+</div>
+<div class="flex items-center justify-between md:justify-end gap-6 ml-14 md:ml-0">
+<div class="flex flex-col items-start md:items-end">
+<span class="font-label-md text-label-md text-on-surface-variant mb-1">Category</span>
+<span class="font-label-lg text-label-lg text-on-surface">HVAC</span>
+</div>
+<div class="flex flex-col items-start md:items-end w-24">
+<span class="font-label-md text-label-md text-on-surface-variant mb-1">Status</span>
+<div class="flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+<span class="font-label-lg text-label-lg text-on-surface">In Progress</span>
+</div>
+</div>
+<button class="hidden md:flex text-on-surface-variant hover:text-primary transition-colors p-2 rounded-full hover:bg-surface-container-highest">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</div>
+</div>
+</div>
+</main>
+</div>
+<!-- Mobile BottomNavBar -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full z-50 flex justify-around items-center h-20 px-2 pb-safe bg-surface-container dark:bg-surface-container border-t border-outline-variant dark:border-outline-variant rounded-t-xl">
+<button class="flex flex-col items-center justify-center bg-secondary-container dark:bg-secondary-container text-on-secondary-container dark:text-on-secondary-container rounded-full px-5 py-1 scale-95 transition-transform duration-200">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="text-label-md font-label-md mt-1">Dashboard</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant px-5 py-1 hover:text-on-surface dark:hover:text-on-surface">
+<span class="material-symbols-outlined" data-icon="warning">warning</span>
+<span class="text-label-md font-label-md mt-1">Issues</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant px-5 py-1 hover:text-on-surface dark:hover:text-on-surface">
+<span class="material-symbols-outlined" data-icon="assessment">assessment</span>
+<span class="text-label-md font-label-md mt-1">Reports</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant px-5 py-1 hover:text-on-surface dark:hover:text-on-surface">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="text-label-md font-label-md mt-1">Settings</span>
+</button>
+</nav>
+</body></html>

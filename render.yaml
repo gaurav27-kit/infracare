@@ -1,0 +1,43 @@
+# ─── InfraCare — Render Blueprint Specification ──────────────────────────────
+# Automatically provisions both the managed PostgreSQL database and the Express Web Service.
+#
+# Documentation: https://render.com/docs/blueprint-spec
+
+services:
+  # ─── InfraCare Express Backend API ──────────────────────────────────────────
+  - type: web
+    name: infracare-backend
+    runtime: node
+    rootDir: backend
+    plan: free
+    region: oregon
+    buildCommand: npm ci && npm run migrate:deploy
+    startCommand: npm start
+    healthCheckPath: /api/v1/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+      - key: LOG_LEVEL
+        value: info
+      - key: DATABASE_URL
+        fromDatabase:
+          name: infracare-postgres-db
+          property: connectionString
+      - key: ALLOWED_ORIGINS
+        value: "*"
+      - key: CLOUDINARY_CLOUD_NAME
+        sync: false
+      - key: CLOUDINARY_API_KEY
+        sync: false
+      - key: CLOUDINARY_API_SECRET
+        sync: false
+
+# ─── Managed PostgreSQL Database ──────────────────────────────────────────────
+databases:
+  - name: infracare-postgres-db
+    databaseName: smart_campus_fix
+    user: infracare_admin
+    plan: free
+    region: oregon

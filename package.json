@@ -1,0 +1,12 @@
+{
+  "name": "infracare",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "backend": "npm --prefix backend run dev",
+    "backend:test": "npm --prefix backend test",
+    "backend:migrate": "npm --prefix backend run migrate:deploy",
+    "backend:seed": "npm --prefix backend run seed",
+    "dev": "npm run backend"
+  }
+}
