@@ -190,11 +190,12 @@ class AdminAnalyticsData {
     int critical = 0;
 
     final Map<String, int> categoryCounts = {
-      'Electrical': 0,
+      'IT & AV': 0,
       'HVAC': 0,
+      'Electrical': 0,
       'Plumbing': 0,
-      'Structural': 0,
-      'General': 0,
+      'Safety': 0,
+      'Other': 0,
     };
 
     for (final issue in issues) {
@@ -224,18 +225,20 @@ class AdminAnalyticsData {
         medium++;
       }
 
-      // Infer category from asset or description/title
-      final text = '${issue.asset ?? ''} ${issue.title} ${issue.description}'.toLowerCase();
-      if (text.contains('electric') || text.contains('light') || text.contains('power') || text.contains('switch') || text.contains('projector')) {
-        categoryCounts['Electrical'] = (categoryCounts['Electrical'] ?? 0) + 1;
-      } else if (text.contains('ac') || text.contains('air') || text.contains('hvac') || text.contains('cooling') || text.contains('ventilation')) {
+      // Infer category from asset or description/title using current system categories
+      final text = '${issue.asset ?? ''} ${issue.customAssetName ?? ''} ${issue.title} ${issue.description}'.toLowerCase();
+      if (text.contains('projector') || text.contains('imac') || text.contains('monitor') || text.contains('computer') || text.contains('screen') || text.contains('display') || text.contains('audio') || text.contains('visual') || text.contains('it')) {
+        categoryCounts['IT & AV'] = (categoryCounts['IT & AV'] ?? 0) + 1;
+      } else if (text.contains('ac') || text.contains('air') || text.contains('hvac') || text.contains('cooling') || text.contains('ventilation') || text.contains('chiller')) {
         categoryCounts['HVAC'] = (categoryCounts['HVAC'] ?? 0) + 1;
-      } else if (text.contains('water') || text.contains('pipe') || text.contains('leak') || text.contains('sink') || text.contains('restroom')) {
+      } else if (text.contains('electric') || text.contains('power') || text.contains('switch') || text.contains('panel') || text.contains('ups') || text.contains('light') || text.contains('wiring') || text.contains('socket')) {
+        categoryCounts['Electrical'] = (categoryCounts['Electrical'] ?? 0) + 1;
+      } else if (text.contains('water') || text.contains('pipe') || text.contains('leak') || text.contains('tap') || text.contains('washroom') || text.contains('sink') || text.contains('sanitation') || text.contains('plumb')) {
         categoryCounts['Plumbing'] = (categoryCounts['Plumbing'] ?? 0) + 1;
-      } else if (text.contains('door') || text.contains('window') || text.contains('wall') || text.contains('floor') || text.contains('ceiling') || text.contains('elevator')) {
-        categoryCounts['Structural'] = (categoryCounts['Structural'] ?? 0) + 1;
+      } else if (text.contains('fire') || text.contains('safety') || text.contains('alarm') || text.contains('extinguisher') || text.contains('smoke') || text.contains('hazard')) {
+        categoryCounts['Safety'] = (categoryCounts['Safety'] ?? 0) + 1;
       } else {
-        categoryCounts['General'] = (categoryCounts['General'] ?? 0) + 1;
+        categoryCounts['Other'] = (categoryCounts['Other'] ?? 0) + 1;
       }
     }
 

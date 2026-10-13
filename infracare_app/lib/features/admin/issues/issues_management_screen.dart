@@ -51,17 +51,19 @@ class _IssuesManagementScreenState
   }
 
   String _inferCategory(IssueModel issue) {
-    final text = '${issue.asset ?? ''} ${issue.title} ${issue.description}'.toLowerCase();
-    if (text.contains('electric') || text.contains('light') || text.contains('power') || text.contains('projector')) {
-      return 'Electrical';
-    } else if (text.contains('ac') || text.contains('air') || text.contains('hvac') || text.contains('cool')) {
+    final text = '${issue.asset ?? ''} ${issue.customAssetName ?? ''} ${issue.title} ${issue.description}'.toLowerCase();
+    if (text.contains('projector') || text.contains('imac') || text.contains('monitor') || text.contains('computer') || text.contains('screen') || text.contains('display') || text.contains('audio') || text.contains('visual') || text.contains('it')) {
+      return 'IT & AV';
+    } else if (text.contains('ac') || text.contains('air') || text.contains('hvac') || text.contains('cool') || text.contains('ventilation')) {
       return 'HVAC';
-    } else if (text.contains('water') || text.contains('pipe') || text.contains('leak') || text.contains('restroom')) {
+    } else if (text.contains('electric') || text.contains('light') || text.contains('power') || text.contains('panel') || text.contains('ups') || text.contains('switch')) {
+      return 'Electrical';
+    } else if (text.contains('water') || text.contains('pipe') || text.contains('leak') || text.contains('tap') || text.contains('restroom') || text.contains('washroom')) {
       return 'Plumbing';
-    } else if (text.contains('door') || text.contains('window') || text.contains('wall') || text.contains('elevator')) {
-      return 'Structural';
+    } else if (text.contains('fire') || text.contains('safety') || text.contains('alarm') || text.contains('extinguisher')) {
+      return 'Safety';
     }
-    return 'General';
+    return 'Other';
   }
 
   @override

@@ -6,6 +6,7 @@ import '../../core/widgets/loading_skeleton.dart';
 import '../../core/widgets/custom_button.dart';
 import '../../models/dashboard_model.dart';
 import '../../providers/dashboard_provider.dart';
+import '../../routes/app_routes.dart';
 
 /// Dashboard — the first tab of the application.
 class DashboardScreen extends ConsumerWidget {
@@ -66,7 +67,14 @@ class DashboardScreen extends ConsumerWidget {
                 color: AppColors.textPrimary,
               ),
             ),
-            onPressed: () {},
+            tooltip: 'Settings',
+            onPressed: () {
+              if (onNavigateToTab != null) {
+                onNavigateToTab!(3);
+              } else {
+                Navigator.of(context).pushNamed(AppRoutes.settings);
+              }
+            },
           ),
           const SizedBox(width: 12),
         ],

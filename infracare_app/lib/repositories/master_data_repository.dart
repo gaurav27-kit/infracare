@@ -42,7 +42,7 @@ class MasterDataRepository {
     // 2nd Floor
     const SpaceModel(id: 'SPC-AIML-13', floorId: 'FLR-AIML-02', name: 'CSAM CR-01', roomNumber: 'CSAM-CR-01'),
     const SpaceModel(id: 'SPC-AIML-14', floorId: 'FLR-AIML-02', name: 'CSDS CR-01', roomNumber: 'CSDS-CR-01'),
-    const SpaceModel(id: 'SPC-AIML-15', floorId: 'FLR-AIML-02', name: 'ETCR-04', roomNumber: 'ETCR-04'),
+    const SpaceModel(id: 'SPC-AIML-15', floorId: 'FLR-AIML-02', name: 'CBCR-06', roomNumber: 'ETCR-04'),
     const SpaceModel(id: 'SPC-AIML-16', floorId: 'FLR-AIML-02', name: 'Washroom', roomNumber: 'WASHROOM-L2'),
   ];
 

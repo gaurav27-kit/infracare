@@ -3,7 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../core/constants/app_constants.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_text_styles.dart';
-import '../../../core/widgets/custom_bottom_sheet.dart';
 import '../../../core/widgets/custom_dialog.dart';
 import '../../../providers/auth_provider.dart';
 import '../../../routes/app_routes.dart';
@@ -30,10 +29,11 @@ class AdminSettingsScreen extends ConsumerWidget {
   }
 
   void _showHelpSheet(BuildContext context) {
-    CustomBottomSheet.show(
+    CustomDialog.showContentDialog(
       context: context,
       title: 'Admin Help & FAQ',
-      child: Column(
+      icon: Icons.help_outline,
+      content: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           _buildFaqItem(
@@ -59,17 +59,18 @@ class AdminSettingsScreen extends ConsumerWidget {
   }
 
   void _showPrivacyPolicySheet(BuildContext context) {
-    CustomBottomSheet.show(
+    CustomDialog.showContentDialog(
       context: context,
       title: 'Privacy Policy',
-      child: const Column(
+      icon: Icons.privacy_tip_outlined,
+      content: const Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
             'Data Protection & Privacy Policy',
             style: TextStyle(
               color: AppColors.textPrimary,
-              fontSize: 16,
+              fontSize: 15,
               fontWeight: FontWeight.bold,
             ),
           ),
@@ -91,17 +92,18 @@ class AdminSettingsScreen extends ConsumerWidget {
   }
 
   void _showTermsSheet(BuildContext context) {
-    CustomBottomSheet.show(
+    CustomDialog.showContentDialog(
       context: context,
       title: 'Terms & Conditions',
-      child: const Column(
+      icon: Icons.description_outlined,
+      content: const Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
             'InfraCare Terms of Service',
             style: TextStyle(
               color: AppColors.textPrimary,
-              fontSize: 16,
+              fontSize: 15,
               fontWeight: FontWeight.bold,
             ),
           ),

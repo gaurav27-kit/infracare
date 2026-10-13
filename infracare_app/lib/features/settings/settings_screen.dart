@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../core/constants/app_constants.dart';
 import '../../core/theme/app_colors.dart';
-import '../../core/widgets/custom_bottom_sheet.dart';
 import '../../core/widgets/custom_dialog.dart';
 import '../../providers/auth_provider.dart';
 import '../../routes/app_routes.dart';
@@ -34,10 +33,11 @@ class SettingsScreen extends ConsumerWidget {
   }
 
   void _showHelpSheet(BuildContext context) {
-    CustomBottomSheet.show(
+    CustomDialog.showContentDialog(
       context: context,
       title: 'Help & FAQ',
-      child: Column(
+      icon: Icons.help_outline,
+      content: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           _buildFaqItem(
@@ -63,17 +63,18 @@ class SettingsScreen extends ConsumerWidget {
   }
 
   void _showPrivacyPolicySheet(BuildContext context) {
-    CustomBottomSheet.show(
+    CustomDialog.showContentDialog(
       context: context,
       title: 'Privacy Policy',
-      child: const Column(
+      icon: Icons.privacy_tip_outlined,
+      content: const Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
             'Data Protection & Privacy Policy',
             style: TextStyle(
               color: AppColors.textPrimary,
-              fontSize: 16,
+              fontSize: 15,
               fontWeight: FontWeight.bold,
             ),
           ),
@@ -95,17 +96,18 @@ class SettingsScreen extends ConsumerWidget {
   }
 
   void _showTermsSheet(BuildContext context) {
-    CustomBottomSheet.show(
+    CustomDialog.showContentDialog(
       context: context,
       title: 'Terms & Conditions',
-      child: const Column(
+      icon: Icons.description_outlined,
+      content: const Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
             'InfraCare Terms of Service',
             style: TextStyle(
               color: AppColors.textPrimary,
-              fontSize: 16,
+              fontSize: 15,
               fontWeight: FontWeight.bold,
             ),
           ),
@@ -269,73 +271,6 @@ class SettingsScreen extends ConsumerWidget {
                     title: 'Terms & Conditions',
                     subtitle: 'Legal agreements and usage terms',
                     onTap: () => _showTermsSheet(context),
-                  ),
-                ],
-              ),
-            ),
-            const SizedBox(height: 24),
-
-            const Text(
-              'PREFERENCES',
-              style: TextStyle(
-                color: AppColors.textMuted,
-                fontSize: 12,
-                fontWeight: FontWeight.bold,
-                letterSpacing: 1.0,
-              ),
-            ),
-            const SizedBox(height: 10),
-
-            Card(
-              child: Column(
-                children: [
-                  SwitchListTile(
-                    value: true,
-                    onChanged: (_) {},
-                    activeThumbColor: AppColors.primary,
-                    title: const Text(
-                      'Dark Mode Theme',
-                      style: TextStyle(
-                        color: AppColors.textPrimary,
-                        fontSize: 14,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                    subtitle: const Text(
-                      'Always enabled (Material 3 Dark)',
-                      style: TextStyle(
-                        color: AppColors.textMuted,
-                        fontSize: 12,
-                      ),
-                    ),
-                    secondary: const Icon(
-                      Icons.dark_mode_outlined,
-                      color: AppColors.textSecondary,
-                    ),
-                  ),
-                  const Divider(color: AppColors.cardBorder, height: 1),
-                  ListTile(
-                    leading: const Icon(Icons.api, color: AppColors.textSecondary),
-                    title: const Text(
-                      'REST API Environment',
-                      style: TextStyle(
-                        color: AppColors.textPrimary,
-                        fontSize: 14,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                    subtitle: const Text(
-                      'Backend REST endpoints configured',
-                      style: TextStyle(
-                        color: AppColors.textMuted,
-                        fontSize: 12,
-                      ),
-                    ),
-                    trailing: const Icon(
-                      Icons.chevron_right,
-                      color: AppColors.textMuted,
-                    ),
-                    onTap: () {},
                   ),
                 ],
               ),

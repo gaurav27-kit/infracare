@@ -442,11 +442,17 @@ class _ReportsAnalyticsScreenState extends ConsumerState<ReportsAnalyticsScreen>
                       ),
                     ),
                     const SizedBox(height: 8),
-                    Text(
-                      cat.key.length > 5 ? '${cat.key.substring(0, 4)}.' : cat.key,
-                      style: const TextStyle(
-                        color: AppColors.textSecondary,
-                        fontSize: 10,
+                    SizedBox(
+                      width: 52,
+                      child: Text(
+                        cat.key,
+                        textAlign: TextAlign.center,
+                        maxLines: 2,
+                        style: const TextStyle(
+                          color: AppColors.textSecondary,
+                          fontSize: 10,
+                          fontWeight: FontWeight.w500,
+                        ),
                       ),
                     ),
                   ],
