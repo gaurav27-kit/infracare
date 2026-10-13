@@ -22,7 +22,7 @@ export const getHealth = asyncHandler(async (req, res) => {
   }
 
   const healthStatus = {
-    service: "smart-campus-backend",
+    service: "infracare-backend",
     version: process.env.npm_package_version || "1.0.0",
     environment: process.env.NODE_ENV || "development",
     uptime: process.uptime(),

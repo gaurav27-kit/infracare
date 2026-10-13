@@ -4,7 +4,7 @@
  */
 
 export const SYSTEM_CONSTANTS = Object.freeze({
-  APP_NAME: "Smart Campus Management System",
+  APP_NAME: "InfraCare",
   API_VERSION: "v1",
   DEFAULT_TIMEZONE: "UTC",
   DEFAULT_DATE_FORMAT: "YYYY-MM-DDTHH:mm:ss.SSSZ",

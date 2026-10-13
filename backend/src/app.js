@@ -13,8 +13,8 @@ const app = express();
 app.use(helmet({ contentSecurityPolicy: false }));
 
 const allowedOrigins = process.env.ALLOWED_ORIGINS
-  ? process.env.ALLOWED_ORIGINS.split(",").map((s) => s.trim())
-  : [process.env.CLIENT_URL, process.env.FRONTEND_URL, "http://localhost:5173", "http://127.0.0.1:5173"].filter(Boolean);
+  ? process.env.ALLOWED_ORIGINS.split(",").map((s) => s.trim()).filter(Boolean)
+  : [process.env.CLIENT_URL, process.env.FRONTEND_URL].filter(Boolean);
 
 app.use(
   cors({

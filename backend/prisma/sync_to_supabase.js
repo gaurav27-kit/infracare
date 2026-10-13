@@ -56,8 +56,8 @@ const sampleIssues = [
     reporterExternalUserId: "ext-user-1",
     attachments: [
       {
-        fileName: "test_ac.png",
-        fileUrl: "https://res.cloudinary.com/t8vzc5br/image/upload/v1791463662/SCMS/issues/xhe5xr5nabhl4kflm7mj.png",
+        fileName: "sample_ac_issue.png",
+        fileUrl: "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80",
         fileType: "image/png",
       },
     ],
@@ -73,8 +73,8 @@ const sampleIssues = [
     reporterExternalUserId: "ext-user-1",
     attachments: [
       {
-        fileName: "scaled_Leetcode Contest.png",
-        fileUrl: "https://res.cloudinary.com/t8vzc5br/image/upload/v1791479617/SCMS/issues/srgws6adpke6x6pjyviw.png",
+        fileName: "sample_panel_issue.png",
+        fileUrl: "https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=800&q=80",
         fileType: "image/png",
       },
     ],

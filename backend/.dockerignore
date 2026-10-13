@@ -1,4 +1,4 @@
-# ─── SCMS Backend — .dockerignore ─────────────────────────────────────────────
+# ─── InfraCare Backend — .dockerignore ─────────────────────────────────────────
 # Prevents unnecessary files from being sent to Docker build context.
 # This speeds up builds and keeps the image lean.
 
@@ -14,14 +14,9 @@ node_modules/
 coverage/
 tests/
 
-# Temporary AI test scripts (not part of core application)
-test-ai.js
-test-ai2.js
-test-ai3.js
-test-ai4.js
-
 # Logs
 *.log
+logs/
 
 # Documentation
 *.md

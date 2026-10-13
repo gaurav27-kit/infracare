@@ -10,8 +10,8 @@ class ApiConstants {
   static const String baseUrl = String.fromEnvironment(
     'API_BASE_URL',
     defaultValue: kIsWeb
-        ? 'http://127.0.0.1:5000/api/v1'
-        : 'http://10.0.2.2:5000/api/v1',
+        ? 'http://127.0.0.1:5050/api/v1'
+        : 'http://10.0.2.2:5050/api/v1',
   );
 
   // ---------------------------------------------------------------------------

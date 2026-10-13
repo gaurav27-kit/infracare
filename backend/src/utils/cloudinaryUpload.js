@@ -5,10 +5,13 @@ import streamifier from "streamifier";
  * Upload a file buffer to Cloudinary via stream.
  *
  * @param {Buffer} fileBuffer - The raw file buffer from multer memory storage.
- * @param {string} folder    - Cloudinary folder path (e.g. "SCMS/complaints/<id>").
+ * @param {string} [folder]   - Cloudinary folder path (defaults to CLOUDINARY_FOLDER or "infracare/issues").
  * @returns {Promise<{url: string, secureUrl: string, publicId: string, width: number, height: number, format: string}>}
  */
-export const uploadToCloudinary = (fileBuffer, folder = "SCMS/complaints") => {
+export const uploadToCloudinary = (
+  fileBuffer,
+  folder = process.env.CLOUDINARY_FOLDER || "infracare/issues"
+) => {
   return new Promise((resolve, reject) => {
     const uploadStream = cloudinary.uploader.upload_stream(
       {
@@ -41,6 +44,13 @@ export const uploadToCloudinary = (fileBuffer, folder = "SCMS/complaints") => {
  * @returns {Promise<object>} Cloudinary deletion result.
  */
 export const deleteFromCloudinary = async (publicId) => {
+  if (!publicId) return { result: "noop" };
+
+  // Safety guard: InfraCare must NEVER delete SCMC/SCMS assets
+  if (publicId.toLowerCase().includes("scms") || publicId.toLowerCase().includes("scmc")) {
+    throw new Error(`Safety Guard: Deletion of SCMC asset forbidden (${publicId})`);
+  }
+
   try {
     const result = await cloudinary.uploader.destroy(publicId);
     return result;

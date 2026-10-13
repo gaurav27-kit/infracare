@@ -7,7 +7,7 @@
  * - Carries `statusCode` so the error handler can set the HTTP response correctly
  * - `isOperational` flag separates user-facing errors from unexpected programmer errors
  *   → operational errors get descriptive messages; others get a generic 500
- * - `errors` array supports field-level validation error details (e.g., from Joi/Mongoose)
+ * - `errors` array supports field-level validation error details (e.g., from Zod)
  */
 
 export class ApiError extends Error {

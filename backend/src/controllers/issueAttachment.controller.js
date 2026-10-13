@@ -30,10 +30,12 @@ export const createAttachment = asyncHandler(async (req, res) => {
   let fileUrl = req.body?.fileUrl;
   let fileType = req.body?.fileType || "image/jpeg";
 
+  const targetFolder = process.env.CLOUDINARY_FOLDER || "infracare/issues";
+
   // Case 1: Uploaded via multipart form (req.file)
   if (req.file) {
     try {
-      const uploadResult = await uploadToCloudinary(req.file.buffer, "SCMS/issues");
+      const uploadResult = await uploadToCloudinary(req.file.buffer, targetFolder);
       fileUrl = uploadResult.secureUrl || uploadResult.url;
       fileName = req.file.originalname || fileName;
       fileType = req.file.mimetype || fileType;
@@ -45,7 +47,7 @@ export const createAttachment = asyncHandler(async (req, res) => {
     // Case 2: Base64 data URI uploaded in JSON body
     try {
       const uploadResult = await cloudinary.uploader.upload(fileUrl, {
-        folder: "SCMS/issues",
+        folder: targetFolder,
         resource_type: "auto",
       });
       fileUrl = uploadResult.secure_url || uploadResult.url;

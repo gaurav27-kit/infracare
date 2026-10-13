@@ -9,7 +9,7 @@
 
 - **Framework**: Express.js (ES Modules)
 - **Database ORM**: Prisma ORM with PostgreSQL
-- **Validation**: Joi
+- **Validation**: Zod
 - **Logger**: Winston (Logging state mutations: POST, PUT, PATCH, DELETE)
 - **Testing**: Jest & Supertest
 
@@ -45,6 +45,6 @@ backend/
 │   ├── services/        # Business logic layer
 │   ├── types/           # Enums & constants
 │   ├── utils/           # ApiResponse, ApiError, logger, asyncHandler
-│   └── validators/      # Joi schemas
+│   └── validators/      # Zod schemas
 └── tests/               # Jest test suites
 ```

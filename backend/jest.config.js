@@ -37,6 +37,6 @@ export default {
   // Detect open handles (helps find hanging DB connections)
   detectOpenHandles: true,
 
-  // Increase timeout for MongoDB Memory Server
+  // Test execution timeout
   testTimeout: 30000,
 };
