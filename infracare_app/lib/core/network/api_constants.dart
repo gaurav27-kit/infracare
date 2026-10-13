@@ -17,8 +17,8 @@ class ApiConstants {
   // ---------------------------------------------------------------------------
   // Connection / Timeout
   // ---------------------------------------------------------------------------
-  static const int connectTimeoutMs = 4000;
-  static const int receiveTimeoutMs = 8000;
+  static const int connectTimeoutMs = 15000;
+  static const int receiveTimeoutMs = 30000;
 
   // ---------------------------------------------------------------------------
   // Auth Headers

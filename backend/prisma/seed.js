@@ -104,7 +104,7 @@ export async function seedSpaces(floorsMap) {
 
   // Exact names specified:
   // 1st Floor: Apple Lab, CSAM Lab 02, CSAM Lab 03, UPS Room, CSAM CR-02, CSAM CR-03, CSAM CR-04, CSAM CR-05, CSAM CR-06, CSAM Lab 04, CSDS Lab 01, Washroom
-  // 2nd Floor: CSAM CR-01, CSDS CR-01, ETCR-04, Washroom
+  // 2nd Floor: CSAM CR-01, CSDS CR-01, CBCR-06, Washroom
   const spaceDefinitions = [
     // 1st Floor
     { floorId: floor1.id, name: "Apple Lab", code: "APPLE-LAB", type: "LABORATORY", capacity: 40, isAccessible: true },
@@ -123,7 +123,7 @@ export async function seedSpaces(floorsMap) {
     // 2nd Floor
     { floorId: floor2.id, name: "CSAM CR-01", code: "CSAM-CR-01", type: "CLASSROOM", capacity: 60, isAccessible: true },
     { floorId: floor2.id, name: "CSDS CR-01", code: "CSDS-CR-01", type: "CLASSROOM", capacity: 60, isAccessible: true },
-    { floorId: floor2.id, name: "ETCR-04", code: "ETCR-04", type: "CLASSROOM", capacity: 60, isAccessible: true },
+    { floorId: floor2.id, name: "CBCR-06", code: "ETCR-04", type: "CLASSROOM", capacity: 60, isAccessible: true },
     { floorId: floor2.id, name: "Washroom", code: "WASHROOM-L2", type: "WASHROOM", capacity: 10, isAccessible: true },
   ];
 

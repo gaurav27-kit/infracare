@@ -2,7 +2,6 @@ import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../core/theme/app_colors.dart';
-import '../../core/widgets/custom_button.dart';
 import '../../core/widgets/loading_skeleton.dart';
 import '../../core/widgets/priority_chip.dart';
 import '../../core/widgets/status_chip.dart';
@@ -222,22 +221,6 @@ class IssueDetailsScreen extends ConsumerWidget {
                 ),
               ),
               const SizedBox(height: 24),
-
-              // Track dispatch button
-              CustomButton(
-                label: 'Track Dispatch Location',
-                icon: Icons.map_outlined,
-                onPressed: () {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                      content: Text(
-                        'Dispatch tracking is active. Technician is assigned.',
-                      ),
-                    ),
-                  );
-                },
-              ),
-              const SizedBox(height: 24),
             ],
           ),
         ),
@@ -295,14 +278,20 @@ class IssueDetailsScreen extends ConsumerWidget {
                     textAlign: TextAlign.center,
                   ),
                   const SizedBox(height: 16),
-                  CustomButton(
-                    label: 'Retry',
-                    width: 140,
-                    height: 40,
+                  ElevatedButton(
                     onPressed: () {
                       ref.read(issueDetailProvider(issueId).notifier).refresh();
                       ref.read(issueAttachmentsProvider(issueId).notifier).refresh();
                     },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: AppColors.primary,
+                      foregroundColor: Colors.white,
+                      minimumSize: const Size(140, 40),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                    ),
+                    child: const Text('Retry'),
                   ),
                 ],
               ),
