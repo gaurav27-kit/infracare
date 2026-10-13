@@ -28,45 +28,53 @@ class DashboardRepository {
 
   /// Attempts a fresh fetch from the API — used for background refresh only.
   Future<ApiResponse<DashboardModel>> getDashboardSummaryFromNetwork() async {
+    // 1. Try /dashboard/issues for exact status and priority maps
     try {
-      final response = await _apiClient.get(ApiConstants.dashboardSummary);
-      if (response.isSuccess && response.data != null) {
-        final json = response.data as Map<String, dynamic>;
+      final statsResponse = await _apiClient.get(ApiConstants.dashboardIssueStats);
+      if (statsResponse.isSuccess && statsResponse.data != null) {
+        final json = statsResponse.data is Map<String, dynamic>
+            ? statsResponse.data as Map<String, dynamic>
+            : <String, dynamic>{};
         final model = DashboardModel.fromJson(json);
-        return ApiResponse.success(model, statusCode: response.statusCode);
+        if (model.openCount != null) {
+          return ApiResponse.success(model, statusCode: statsResponse.statusCode);
+        }
       }
     } catch (_) {
       // Fall through
     }
+
+    // 2. Try computing live stats from /issues
     try {
-      final statsResponse = await _apiClient.get(ApiConstants.dashboardIssueStats);
-      if (statsResponse.isSuccess && statsResponse.data != null) {
-        final json = statsResponse.data as Map<String, dynamic>;
-        final model = DashboardModel.fromJson(json);
-        return ApiResponse.success(model, statusCode: statsResponse.statusCode);
+      final issuesResponse = await _issueRepo.getIssues();
+      if (issuesResponse.isSuccess && issuesResponse.data != null && issuesResponse.data!.isNotEmpty) {
+        final model = _computeStatsFromIssues(issuesResponse.data!);
+        return ApiResponse.success(model, statusCode: 200);
       }
     } catch (_) {
       // Fall through to local
     }
-    // Fallback: compute from local
+
+    // 3. Fallback: compute from local
     final issues = await _issueRepo.getIssuesLocal();
     return ApiResponse.success(_computeStatsFromIssues(issues), statusCode: 200);
   }
 
   DashboardModel _computeStatsFromIssues(List<IssueModel> issues) {
-    final inProgress = issues.where((i) => i.status.toUpperCase() == 'IN_PROGRESS').length;
+    final inProgress = issues.where((i) =>
+        i.status.toUpperCase() == 'IN_PROGRESS' || i.status.toUpperCase() == 'ASSIGNED').length;
     final resolved = issues.where((i) =>
         i.status.toUpperCase() == 'RESOLVED' || i.status.toUpperCase() == 'CLOSED').length;
     final open = issues.where((i) =>
-        i.status.toUpperCase() == 'OPEN' || i.status.toUpperCase() == 'PENDING').length;
+        i.status.toUpperCase() == 'OPEN' || i.status.toUpperCase() == 'REPORTED' || i.status.toUpperCase() == 'PENDING').length;
     final critical = issues.where((i) =>
         i.priority.toUpperCase() == 'CRITICAL' || i.priority.toUpperCase() == 'HIGH').length;
 
     return DashboardModel(
-      openCount: open > 0 ? open : 3,
-      inProgressCount: inProgress > 0 ? inProgress : 6,
-      resolvedCount: resolved > 0 ? resolved : 15,
-      criticalCount: critical > 0 ? critical : 1,
+      openCount: open,
+      inProgressCount: inProgress,
+      resolvedCount: resolved,
+      criticalCount: critical,
       systemStatus: 'All AIML systems operational & monitored.',
     );
   }
@@ -100,6 +108,25 @@ class DashboardRepository {
     } catch (_) {
       // Fall through
     }
+
+    try {
+      final response = await _apiClient.get(ApiConstants.issues);
+      if (response.isSuccess && response.data != null) {
+        final List<dynamic> list = response.data is List
+            ? response.data as List<dynamic>
+            : (response.data['data'] as List<dynamic>? ?? []);
+        if (list.isNotEmpty) {
+          final issues = list
+              .take(5)
+              .map((e) => IssueModel.fromJson(e as Map<String, dynamic>))
+              .toList();
+          return ApiResponse.success(issues, statusCode: response.statusCode);
+        }
+      }
+    } catch (_) {
+      // Fall through
+    }
+
     final local = await _issueRepo.getIssuesLocal();
     return ApiResponse.success(local, statusCode: 200);
   }

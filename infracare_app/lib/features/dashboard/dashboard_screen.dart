@@ -309,25 +309,25 @@ class DashboardScreen extends ConsumerWidget {
       children: [
         _buildStatCard(
           title: 'Open Issues',
-          count: stats.openCount?.toString() ?? '--',
+          count: stats.openCount?.toString() ?? '0',
           icon: Icons.assignment_outlined,
           color: AppColors.primary,
         ),
         _buildStatCard(
           title: 'In Progress',
-          count: stats.inProgressCount?.toString() ?? '--',
+          count: stats.inProgressCount?.toString() ?? '0',
           icon: Icons.pending_actions_rounded,
           color: AppColors.warning,
         ),
         _buildStatCard(
           title: 'Resolved',
-          count: stats.resolvedCount?.toString() ?? '--',
+          count: stats.resolvedCount?.toString() ?? '0',
           icon: Icons.check_circle_outline_rounded,
           color: AppColors.success,
         ),
         _buildStatCard(
           title: 'Critical',
-          count: stats.criticalCount?.toString() ?? '--',
+          count: stats.criticalCount?.toString() ?? '0',
           icon: Icons.warning_amber_rounded,
           color: AppColors.danger,
           isAlert: true,

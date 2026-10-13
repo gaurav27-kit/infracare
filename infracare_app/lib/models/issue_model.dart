@@ -75,9 +75,22 @@ class IssueModel {
       spaceName = json['space'] as String;
     }
 
-    buildingName ??= json['building'] as String?;
+    if (json['building'] is Map) {
+      final bldMap = json['building'] as Map<String, dynamic>;
+      buildingName ??= bldMap['name'] as String?;
+      buildingId ??= bldMap['id'] as String?;
+    } else if (json['building'] is String) {
+      buildingName ??= json['building'] as String?;
+    }
     buildingId ??= json['buildingId'] as String?;
-    floorName ??= json['floor'] as String?;
+
+    if (json['floor'] is Map) {
+      final flrMap = json['floor'] as Map<String, dynamic>;
+      floorName ??= flrMap['name'] as String?;
+      floorId ??= flrMap['id'] as String?;
+    } else if (json['floor'] is String) {
+      floorName ??= json['floor'] as String?;
+    }
     floorId ??= json['floorId'] as String?;
 
     // Asset

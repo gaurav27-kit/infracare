@@ -21,12 +21,47 @@ class DashboardModel {
         systemStatus = null;
 
   factory DashboardModel.fromJson(Map<String, dynamic> json) {
+    final map = json.containsKey('data') && json['data'] is Map<String, dynamic>
+        ? json['data'] as Map<String, dynamic>
+        : json;
+
+    int? open;
+    int? inProgress;
+    int? resolved;
+    int? critical;
+
+    if (map['status'] is Map) {
+      final sMap = map['status'] as Map<String, dynamic>;
+      final openVal = (sMap['OPEN'] as num? ?? 0).toInt() + (sMap['REPORTED'] as num? ?? 0).toInt();
+      final inProgVal = (sMap['IN_PROGRESS'] as num? ?? 0).toInt() + (sMap['ASSIGNED'] as num? ?? 0).toInt();
+      final resVal = (sMap['RESOLVED'] as num? ?? 0).toInt() + (sMap['CLOSED'] as num? ?? 0).toInt();
+      open = openVal;
+      inProgress = inProgVal;
+      resolved = resVal;
+    }
+
+    if (map['priority'] is Map) {
+      final pMap = map['priority'] as Map<String, dynamic>;
+      critical = (pMap['CRITICAL'] as num? ?? 0).toInt() + (pMap['HIGH'] as num? ?? 0).toInt();
+    }
+
+    if (map['counts'] is Map) {
+      final cMap = map['counts'] as Map<String, dynamic>;
+      final total = (cMap['issues'] as num? ?? 0).toInt();
+      open ??= total;
+    }
+
+    open ??= (map['openCount'] as num?)?.toInt() ?? (map['open'] as num?)?.toInt();
+    inProgress ??= (map['inProgressCount'] as num?)?.toInt() ?? (map['inProgress'] as num?)?.toInt();
+    resolved ??= (map['resolvedCount'] as num?)?.toInt() ?? (map['resolved'] as num?)?.toInt();
+    critical ??= (map['criticalCount'] as num?)?.toInt() ?? (map['critical'] as num?)?.toInt();
+
     return DashboardModel(
-      openCount: json['openCount'] as int?,
-      inProgressCount: json['inProgressCount'] as int?,
-      resolvedCount: json['resolvedCount'] as int?,
-      criticalCount: json['criticalCount'] as int?,
-      systemStatus: json['systemStatus'] as String?,
+      openCount: open,
+      inProgressCount: inProgress,
+      resolvedCount: resolved,
+      criticalCount: critical,
+      systemStatus: map['systemStatus'] as String? ?? 'All AIML systems operational & monitored.',
     );
   }
 
